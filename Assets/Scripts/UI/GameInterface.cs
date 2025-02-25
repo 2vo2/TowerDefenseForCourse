@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class GameInterface : MonoBehaviour
@@ -6,6 +7,8 @@ public class GameInterface : MonoBehaviour
     [SerializeField] private UIDocument _gameInterface;
 
     private VisualElement _root;
+
+    public event UnityAction OnButtonClick;
 
     private void Awake()
     {
@@ -21,6 +24,6 @@ public class GameInterface : MonoBehaviour
 
     private void OnTowerButtonClick(ClickEvent evt)
     {
-        print("Tower");
+        OnButtonClick?.Invoke();
     }
 }
