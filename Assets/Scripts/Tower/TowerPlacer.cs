@@ -39,7 +39,7 @@ public class TowerPlacer : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
-            if (hit.transform.gameObject.TryGetComponent(out Tile tile))
+            if (hit.transform.gameObject.TryGetComponent(out TileToPlace tile))
             {
                 _activeTower.transform.position = tile.transform.position;
 

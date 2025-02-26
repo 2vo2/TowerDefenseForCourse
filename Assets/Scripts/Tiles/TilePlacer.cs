@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TilePlacer : EditorWindow
 {
-    public Tile TilePrefab;
+    public TileToPlace TilePrefab;
     public int MinX = -7;
     public int MaxX = 7;
     public int MinZ = -7;
@@ -19,7 +19,7 @@ public class TilePlacer : EditorWindow
     {
         GUILayout.Label("Tile Placer Settings", EditorStyles.boldLabel);
 
-        TilePrefab = (Tile)EditorGUILayout.ObjectField("Tile Prefab", TilePrefab, typeof(Tile), false);
+        TilePrefab = (TileToPlace)EditorGUILayout.ObjectField("Tile Prefab", TilePrefab, typeof(TileToPlace), false);
 
         MinX = EditorGUILayout.IntField("Min X", MinX);
         MaxX = EditorGUILayout.IntField("Max X", MaxX);
@@ -41,13 +41,13 @@ public class TilePlacer : EditorWindow
         }
 
         var parent = new GameObject("TileGrid");
-
+        
         for (var x = MinX; x <= MaxX; x++)
         {
             for (var z = MinZ; z <= MaxZ; z++)
             {
                 var position = new Vector3(x, 0, z);
-                var tile = (Tile)PrefabUtility.InstantiatePrefab(TilePrefab);
+                var tile = (TileToPlace)PrefabUtility.InstantiatePrefab(TilePrefab);
                 tile.transform.position = position;
                 tile.transform.parent = parent.transform;
             }
