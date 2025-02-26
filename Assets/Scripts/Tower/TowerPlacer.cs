@@ -1,13 +1,27 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class TowerPlacer : MonoBehaviour
 {
+    public static TowerPlacer Instance;
+    
     [SerializeField] private GameInterface _gameInterface;
     [SerializeField] private Tower _towerPrefab;
 
     private Tower _activeTower;
     private bool _towerSpawned;
-    
+    private bool _isTowerPlaced;
+
+    public bool IsTowerPlaced => _isTowerPlaced;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else if (Instance == this) 
+            Destroy(Instance);
+    }
+
     private void OnEnable()
     {
         _gameInterface.OnButtonClick += OnButtonClick;
@@ -27,6 +41,7 @@ public class TowerPlacer : MonoBehaviour
     {
         _activeTower = Instantiate(_towerPrefab, SpawnPosition(), Quaternion.identity);
         _towerSpawned = true;
+        _isTowerPlaced = false;
     }
 
     private void PutTowerOnTile()
@@ -47,6 +62,7 @@ public class TowerPlacer : MonoBehaviour
                 {
                     _activeTower = null;
                     _towerSpawned = false;
+                    _isTowerPlaced = true;
                 }
             }
             else
