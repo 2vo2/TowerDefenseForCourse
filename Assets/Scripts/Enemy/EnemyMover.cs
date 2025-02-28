@@ -6,11 +6,13 @@ using UnityEngine.AI;
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent _navMeshAgent;
-    [SerializeField] private Transform _pointToGo;
     [SerializeField] private float _speed;
 
+    private Transform _pointToGo;
+    
     private void Start()
     {
+        _pointToGo = PlayerBase.Instance.PlayerBasePoint;
         _navMeshAgent.speed = _speed;
     }
 
