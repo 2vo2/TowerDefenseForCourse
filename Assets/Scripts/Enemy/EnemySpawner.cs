@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
 
             var enemy = GetInactiveEnemy();
             
-            if (enemy != null)
+            if (enemy != null && !enemy.IsDie)
             {
                 enemy.gameObject.SetActive(true);
             }

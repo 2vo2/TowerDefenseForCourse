@@ -10,7 +10,7 @@ public class EnemyDetector
         {
             if (enemyInScene.gameObject.TryGetComponent(out Enemy enemy))
             {
-                return enemy;
+                return !enemy.IsDie ? enemy : null;
             }
         }
 

@@ -30,12 +30,18 @@ public class Tower : MonoBehaviour
     private void Update()
     {
         _attackTimer += Time.deltaTime;
-        
+    
         if (!_currentEnemy && TowerPlacer.Instance.IsTowerPlaced)
         {
             _currentEnemy = _enemyDetector.DetectEnemy(transform.position, _shootRadius);
         }
         
+        if (_currentEnemy && _currentEnemy.IsDie)
+        {
+            _currentEnemy = null;
+            return;
+        }
+
         if (_attackTimer >= _shootSpeed && _currentEnemy)
         {
             Shoot();
@@ -47,6 +53,7 @@ public class Tower : MonoBehaviour
             }
         }
     }
+
     
     private void Shoot()
     {
@@ -54,6 +61,11 @@ public class Tower : MonoBehaviour
         var shootDirection = _currentEnemy.transform.position - _projectileSpawnPoint.position;
 
         _towerShooter.Shoot(newProjectile, shootDirection, _shootForce);
+
+        if (_currentEnemy == null)
+        {
+            newProjectile.gameObject.SetActive(false);
+        }
     }
 
     private void OnDrawGizmos()

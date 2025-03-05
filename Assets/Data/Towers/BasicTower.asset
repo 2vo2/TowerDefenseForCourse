@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BasicTower
   m_EditorClassIdentifier: 
   _shootRadius: 2
-  _shootSpeed: 0.5
+  _shootSpeed: 1
   _shootForce: 300
   _projectile: {fileID: 2631634825544250438, guid: 55f1ee2329ed7bc43be06de7403e24e4, type: 3}

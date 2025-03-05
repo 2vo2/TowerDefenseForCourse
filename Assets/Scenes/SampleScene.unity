@@ -6147,7 +6147,7 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 5435150163818605148, guid: 5960fe16ac66ebb40b8aa2515e85c258, type: 3}
   _spawnPoint: {fileID: 808384369}
   _spawnSize: 10
-  _spawnDelay: 1
+  _spawnDelay: 5
 --- !u!1001 &699173837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7201,13 +7201,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808384368}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 684855223}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &816274588
 PrefabInstance:
   m_ObjectHideFlags: 0
