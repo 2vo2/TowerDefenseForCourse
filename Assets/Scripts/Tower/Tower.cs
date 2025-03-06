@@ -61,11 +61,6 @@ public class Tower : MonoBehaviour
         var shootDirection = _currentEnemy.transform.position - _projectileSpawnPoint.position;
 
         _towerShooter.Shoot(newProjectile, shootDirection, _shootForce);
-
-        if (_currentEnemy == null)
-        {
-            newProjectile.gameObject.SetActive(false);
-        }
     }
 
     private void OnDrawGizmos()

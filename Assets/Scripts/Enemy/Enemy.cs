@@ -25,8 +25,6 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Projectile projectile))
         {
-            projectile.gameObject.SetActive(false);
-
             _health--;
 
             _enemyUI.ChangeHealthBar(_healthBar, _health);
