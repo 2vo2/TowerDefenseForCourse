@@ -6,6 +6,7 @@ public class TowerPlacer : MonoBehaviour
     public static TowerPlacer Instance;
     
     [SerializeField] private GameInterface _gameInterface;
+    [SerializeField] private MoneySystem _moneySystem;
     [SerializeField] private Tower _towerPrefab;
 
     private Tower _activeTower;
@@ -39,9 +40,14 @@ public class TowerPlacer : MonoBehaviour
 
     private void OnButtonClick()
     {
-        _activeTower = Instantiate(_towerPrefab, SpawnPosition(), Quaternion.identity);
-        _towerSpawned = true;
-        _isTowerPlaced = false;
+        if (_moneySystem.MoneyValue >= 10)
+        {
+            _moneySystem.DeductMoney(10);
+            
+            _activeTower = Instantiate(_towerPrefab, SpawnPosition(), Quaternion.identity);
+            _towerSpawned = true;
+            _isTowerPlaced = false;
+        }
     }
 
     private void PutTowerOnTile()
