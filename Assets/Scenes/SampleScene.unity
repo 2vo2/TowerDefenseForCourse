@@ -2787,6 +2787,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2925,7 +2926,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameInterface: {fileID: 178915658}
+  _moneySystem: {fileID: 330585549}
   _towerPrefab: {fileID: 3292911561796495234, guid: 77ad9b7cd274ff0439f96dcf52a0b1a6, type: 3}
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d53d920fbf83dc449c21116ee7dc729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameUI: {fileID: 178915658}
+  _delay: 1
 --- !u!1001 &337830579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7202,7 +7218,7 @@ Transform:
   m_GameObject: {fileID: 808384368}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
