@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -19,8 +20,6 @@ public class MoneySystem : MonoBehaviour
         }
 
         _enemySpawner.EnemySpawned += OnNewEnemySpawned;
-        
-        print("Subscribed to Enemies and EnemySpawner");
     }
 
     private void Start()
@@ -56,17 +55,19 @@ public class MoneySystem : MonoBehaviour
 
     public void AddMoney(int addValue)
     {
-        if (addValue <= 0) return;
-
-        _moneyValue += addValue;
-        _gameUI.MoneyLabel.text = $"Money: {_moneyValue}";
+        UpdateMoney(addValue, true);
     }
 
     public void DeductMoney(int deductValue)
     {
-        if (deductValue <= 0) return;
+        UpdateMoney(deductValue, false);
+    }
 
-        _moneyValue -= deductValue;
+    private void UpdateMoney(int value, bool isAddition)
+    {
+        if (value <= 0) return;
+
+        _moneyValue = isAddition ? _moneyValue + value : _moneyValue - value;
         _gameUI.MoneyLabel.text = $"Money: {_moneyValue}";
     }
 
