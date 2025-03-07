@@ -354,6 +354,7 @@ MonoBehaviour:
   _pointToHit: {fileID: 1803411752357764686}
   _uiParent: {fileID: 2395554043602635987}
   _healthBar: {fileID: 6544687557732613761}
+  _rewardForKill: 5
 --- !u!136 &8337905450937315483
 CapsuleCollider:
   m_ObjectHideFlags: 0

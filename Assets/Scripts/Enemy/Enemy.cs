@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -6,10 +7,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform _pointToHit;
     [SerializeField] private Transform _uiParent;
     [SerializeField] private Transform _healthBar;
+    [SerializeField] private int _rewardForKill;
     
     private EnemyUI _enemyUI;
     private bool _isDie;
 
+    public event UnityAction<int> EnemyDied;
+    
     public bool IsDie => _isDie;
     public Transform PointToHit => _pointToHit;
 
@@ -34,6 +38,7 @@ public class Enemy : MonoBehaviour
             if (_health <= 0)
             {
                 _isDie = true;
+                EnemyDied?.Invoke(_rewardForKill);
                 gameObject.SetActive(false);
             }
         }
