@@ -3,13 +3,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
+    [SerializeField] private Transform _pointToHit;
     [SerializeField] private Transform _uiParent;
     [SerializeField] private Transform _healthBar;
-
+    
     private EnemyUI _enemyUI;
     private bool _isDie;
 
     public bool IsDie => _isDie;
+    public Transform PointToHit => _pointToHit;
 
     private void Awake()
     {
