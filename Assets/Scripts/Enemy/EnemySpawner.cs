@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -10,14 +11,17 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _spawnDelay;
 
     private List<Enemy> _enemies = new List<Enemy>();
-    
+
+    public List<Enemy> Enemies => _enemies;
+    public event UnityAction<Enemy> EnemySpawned;
+
     private void Start()
     {
         for (var i = 0; i < _spawnSize; i++)
         {
             CreateNewEnemy();
         }
-        
+
         StartCoroutine(SpawnEnemies());
     }
 
@@ -28,14 +32,15 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(_spawnDelay);
 
             var enemy = GetInactiveEnemy();
-            
+
             if (enemy != null && !enemy.IsDie)
             {
                 enemy.gameObject.SetActive(true);
             }
             else
             {
-                CreateNewEnemy().gameObject.SetActive(true);
+                var newEnemy = CreateNewEnemy();
+                newEnemy.gameObject.SetActive(true);
             }
         }
     }
@@ -46,9 +51,11 @@ public class EnemySpawner : MonoBehaviour
         {
             if (!enemy.gameObject.activeSelf)
             {
+                _enemies.Remove(enemy);
                 return enemy;
             }
         }
+
         return null;
     }
 
@@ -57,6 +64,9 @@ public class EnemySpawner : MonoBehaviour
         var newEnemy = Instantiate(_enemyPrefab, _spawnPoint.position, _spawnPoint.rotation);
         newEnemy.gameObject.SetActive(false);
         _enemies.Add(newEnemy);
+        
+        EnemySpawned?.Invoke(newEnemy);
+
         return newEnemy;
     }
 }

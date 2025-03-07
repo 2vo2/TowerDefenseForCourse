@@ -2941,6 +2941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameUI: {fileID: 178915658}
+  _enemySpawner: {fileID: 684855224}
   _delay: 1
 --- !u!1001 &337830579
 PrefabInstance:
@@ -6162,7 +6163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 5435150163818605148, guid: 5960fe16ac66ebb40b8aa2515e85c258, type: 3}
   _spawnPoint: {fileID: 808384369}
-  _spawnSize: 10
+  _spawnSize: 1
   _spawnDelay: 5
 --- !u!1001 &699173837
 PrefabInstance:
