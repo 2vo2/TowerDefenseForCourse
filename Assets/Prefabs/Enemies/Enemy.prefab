@@ -245,7 +245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2395554043602635987}
   m_Layer: 0
-  m_Name: EnemyUI
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 5
   _pointToHit: {fileID: 1803411752357764686}
-  _uiParent: {fileID: 2395554043602635987}
+  _healthBarParent: {fileID: 2395554043602635987}
   _healthBar: {fileID: 6544687557732613761}
   _rewardForKill: 5
 --- !u!136 &8337905450937315483

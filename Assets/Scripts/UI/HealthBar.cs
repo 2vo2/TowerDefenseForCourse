@@ -1,17 +1,17 @@
 using UnityEngine;
 
-public class EnemyUI
+public class HealthBar
 {
-    public void LookAtCamera(Transform enemyUI)
+    public void LookAtCamera(Transform heathBarParent)
     {
-        enemyUI.LookAt(Camera.main.transform);
+        heathBarParent.LookAt(Camera.main.transform);
     }
 
-    public void ChangeHealthBar(Transform healthBar, float enemyHealth)
+    public void ChangeHealthBar(Transform healthBar, float healthValue)
     {
         if (healthBar.transform.localScale.x <= 0f) return;
         
-        var health = enemyHealth + 1;
+        var health = healthValue + 1;
         
         var scale = healthBar.localScale;
         scale.x -= healthBar.localScale.x / health;

@@ -1,15 +1,16 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
     [SerializeField] private Transform _pointToHit;
-    [SerializeField] private Transform _uiParent;
+    [SerializeField] private Transform _healthBarParent;
     [SerializeField] private Transform _healthBar;
     [SerializeField] private int _rewardForKill;
     
-    private EnemyUI _enemyUI;
+    private HealthBar _healthBarInstance;
     private bool _isDie;
 
     public event UnityAction<int> EnemyDied;
@@ -19,12 +20,12 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        _enemyUI = new EnemyUI();
+        _healthBarInstance = new HealthBar();
     }
 
     private void Update()
     {
-        _enemyUI.LookAtCamera(_uiParent);
+        _healthBarInstance.LookAtCamera(_healthBarParent);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -33,7 +34,7 @@ public class Enemy : MonoBehaviour
         {
             _health--;
 
-            _enemyUI.ChangeHealthBar(_healthBar, _health);
+            _healthBarInstance.ChangeHealthBar(_healthBar, _health);
 
             if (_health <= 0)
             {
