@@ -57,7 +57,7 @@ public class Tower : MonoBehaviour
     
     private void Shoot()
     {
-        var newProjectile = Instantiate(_projectile, _projectileSpawnPoint.position, Quaternion.identity);
+        var newProjectile = Instantiate(_projectile, _projectileSpawnPoint.position, Quaternion.identity, transform);
         var shootDirection = _currentEnemy.PointToHit.transform.position - _projectileSpawnPoint.position;
 
         _towerShooter.Shoot(newProjectile, shootDirection, _shootForce);

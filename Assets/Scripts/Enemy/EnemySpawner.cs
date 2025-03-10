@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Enemy CreateNewEnemy()
     {
-        var newEnemy = Instantiate(_enemyPrefab, _spawnPoint.position, _spawnPoint.rotation);
+        var newEnemy = Instantiate(_enemyPrefab, _spawnPoint.position, _spawnPoint.rotation, transform);
         newEnemy.gameObject.SetActive(false);
         _enemies.Add(newEnemy);
         
