@@ -17,4 +17,9 @@ public class HealthBar
         scale.x -= healthBar.localScale.x / health;
         healthBar.localScale = scale;
     }
+
+    public void ChangeHealthBar(Transform healthBar)
+    {
+        
+    }
 }

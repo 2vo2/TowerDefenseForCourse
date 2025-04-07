@@ -71,9 +71,9 @@ public class Enemy : MonoBehaviour
         while (true)
         {
             _isAttack = true;
-
+        
             yield return new WaitForSeconds(_attackDelay);
-
+            
             _isAttack = false;   
         }
     }
