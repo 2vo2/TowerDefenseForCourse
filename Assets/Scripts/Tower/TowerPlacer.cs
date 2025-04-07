@@ -60,7 +60,7 @@ public class TowerPlacer : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
-            if (hit.transform.gameObject.TryGetComponent(out TileToPlace tile))
+            if (hit.transform.gameObject.TryGetComponent(out TileToPlace tile) && !tile.IsBooked)
             {
                 _activeTower.transform.position = tile.transform.position;
 
@@ -69,6 +69,7 @@ public class TowerPlacer : MonoBehaviour
                     _activeTower = null;
                     _towerSpawned = false;
                     _isTowerPlaced = true;
+                    tile.Booked();
                 }
             }
             else

@@ -1,10 +1,12 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
+    [SerializeField] private float _attackDelay;
     [SerializeField] private Transform _pointToHit;
     [SerializeField] private Transform _healthBarParent;
     [SerializeField] private Transform _healthBar;
@@ -12,17 +14,19 @@ public class Enemy : MonoBehaviour
     
     private HealthBar _healthBarInstance;
     private bool _isDie;
+    private bool _isAttack;
 
     public event UnityAction<int> EnemyDied;
     
     public bool IsDie => _isDie;
+    public bool IsAttack => _isAttack;
     public Transform PointToHit => _pointToHit;
 
     private void Awake()
     {
         _healthBarInstance = new HealthBar();
     }
-
+    
     private void Update()
     {
         _healthBarInstance.LookAtCamera(_healthBarParent);
@@ -38,11 +42,49 @@ public class Enemy : MonoBehaviour
 
             if (_health <= 0)
             {
-                _isDie = true;
-                EnemyDied?.Invoke(_rewardForKill);
-                gameObject.SetActive(false);
+                Die();
             }
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerBase playerBase))
+        {
+            if (!_isAttack)
+            {
+                StartCoroutine(Attack());
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerBase playerBase))
+        {
+            StopCoroutine(Attack());
+        }
+    }
+
+    private IEnumerator Attack()
+    {
+        while (true)
+        {
+            _isAttack = true;
+
+            yield return new WaitForSeconds(_attackDelay);
+
+            _isAttack = false;   
+        }
+    }
+    
+    private void Die()
+    {
+        _isDie = true;
+        EnemyDied?.Invoke(_rewardForKill);
+        
+        StopCoroutine(Attack());
+        
+        gameObject.SetActive(false);
+    }
 }
