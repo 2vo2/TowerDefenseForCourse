@@ -886,7 +886,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24e008dda739b7499b4603c26bc3b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menu: {fileID: 803686290}
+  _menuUIDocument: {fileID: 803686290}
+  _mainMenu: {fileID: 9197481963319205126, guid: 69e5c10db414efd42bcfaf624273fffa, type: 3}
+  _settingsMenu: {fileID: 9197481963319205126, guid: f4a7013ff39b3ad43b69a47fcc6e82db, type: 3}
 --- !u!1001 &804760117
 PrefabInstance:
   m_ObjectHideFlags: 0

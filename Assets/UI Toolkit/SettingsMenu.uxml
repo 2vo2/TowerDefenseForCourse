@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
->
-    
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="Settings" style="flex-grow: 1; justify-content: center; align-items: center; flex-direction: column; align-self: stretch;">
+        <engine:VisualElement name="Music" style="flex-grow: 1; justify-content: center; align-self: center; flex-direction: column; align-items: center; height: 256px; background-color: rgb(76, 174, 125); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; margin-top: 200px; margin-bottom: 200px;">
+            <engine:Label text="Music" style="font-size: 48px; -unity-font-style: bold; color: rgb(255, 255, 255); margin-bottom: 20px;" />
+            <engine:Toggle label="Turn On/Off" value="true" name="MusicToggle" toggle-on-label-click="true" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold; align-items: center;" />
+            <engine:Slider label="Volume" value="50" high-value="100" name="VolumeSlider" style="font-size: 20px; color: rgb(255, 255, 255); -unity-text-align: upper-center; width: 450px; -unity-font-style: bold;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="Button" style="flex-grow: 1; align-self: stretch; align-items: center; justify-content: flex-end;">
+            <engine:Button text="Back" name="BackButton" style="width: 12%; height: 7%; font-size: 36px; -unity-font-style: bold; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 0; color: rgb(255, 255, 255); background-color: rgb(76, 174, 125); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; padding-top: 40px; padding-bottom: 40px;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
 </engine:UXML>
