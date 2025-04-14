@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Tower", fileName = "New Tower Data", order = 0)]
 public class TowerScriptableObject : ScriptableObject
