@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c83d0f6820cb44a976f993011a6c9b, type: 3}
   m_Name: SoundLibrary
   m_EditorClassIdentifier: 
-  _backgroundMusic: {fileID: 0}
-  _buttonClickSound: {fileID: 0}
+  _backgroundMusic: {fileID: 8300000, guid: 53a284d666d5b2248ab6c2098051793a, type: 3}
+  _buttonClickSound: {fileID: 8300000, guid: 09f8dc09efedc414784e7ba556669245, type: 3}
