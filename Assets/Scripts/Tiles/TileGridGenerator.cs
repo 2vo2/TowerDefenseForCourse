@@ -1,38 +1,30 @@
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
+using System.Collections.Generic;
 
 public class TileGridGenerator : EditorWindow
 {
-    public TileToPlace TilePrefab;
-    public Road RoadPrefab;
-    [FormerlySerializedAs("MaxX")] public int SizeX = 7;
-    [FormerlySerializedAs("MaxZ")] public int SizeZ = 7;
-    public int RandomRoadCount = 3;
+    [SerializeField] private TileToPlace TilePrefab;
+    [SerializeField] private Road RoadPrefab;
+    [SerializeField] private int SizeX = 10;
+    [SerializeField] private int SizeZ = 10;
 
-    private int _roadZ;
     private List<Road> _randomRoads;
-    private List<Road> _connectionRoads;
-    
-    [MenuItem("Tools/Tile Placer")]
+
+    [MenuItem("Tools/Tile Grid Generator")]
     public static void ShowWindow()
     {
-        GetWindow<TileGridGenerator>("Tile Placer");
+        GetWindow<TileGridGenerator>("Tile Grid Generator");
     }
 
     private void OnGUI()
     {
-        GUILayout.Label("Tile Placer Settings", EditorStyles.boldLabel);
-
         TilePrefab = (TileToPlace)EditorGUILayout.ObjectField("Tile Prefab", TilePrefab, typeof(TileToPlace), false);
         RoadPrefab = (Road)EditorGUILayout.ObjectField("Road Prefab", RoadPrefab, typeof(Road), false);
-        
-        SizeX = EditorGUILayout.IntField("Max X", SizeX);
-        SizeZ = EditorGUILayout.IntField("Max Z", SizeZ);
-        RandomRoadCount = EditorGUILayout.IntField("Random Road Count", RandomRoadCount);
+        SizeX = EditorGUILayout.IntField("Size X", SizeX);
+        SizeZ = EditorGUILayout.IntField("Size Z", SizeZ);
 
-        if (GUILayout.Button("Place Tiles"))
+        if (GUILayout.Button("Generate Grid"))
         {
             PlaceTiles();
         }
@@ -40,135 +32,131 @@ public class TileGridGenerator : EditorWindow
 
     private void PlaceTiles()
     {
-        if (TilePrefab == null)
+        if (TilePrefab == null || RoadPrefab == null)
         {
-            Debug.LogError("Assign a tile prefab first!");
+            Debug.LogError("Assign prefabs first!");
             return;
         }
 
         var parent = new GameObject("TileGrid");
         _randomRoads = new List<Road>();
 
-        // Початкова дорога
-        _roadZ = Random.Range(-SizeZ + 1, SizeZ - 1);
+        int halfInnerX = Mathf.CeilToInt((SizeX - 1) / 2f);
+        int innerZ = SizeZ - 1;
+
+        // Старт
+        int startZ = Random.Range(-innerZ, innerZ + 1);
         var startRoad = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
-        startRoad.gameObject.name = "StartRoad";
-        startRoad.transform.position = new Vector3(-SizeX, 0, _roadZ);
+        startRoad.name = "StartRoad";
+        startRoad.transform.position = new Vector3(-SizeX, 0, startZ);
         startRoad.transform.parent = parent.transform;
 
-        var currentRoadPosition = startRoad.transform.position;
-
-        for (int i = 0; i < RandomRoadCount; i++)
-        {
-            // Обмеження для наступної позиції
-            int minX = Mathf.Clamp((int)currentRoadPosition.x + 1, -SizeX + 1, SizeX - 1);
-            int maxX = SizeX - 1;
-
-            int minZ = -SizeZ + 1;
-            int maxZ = SizeZ - 1;
-
-            // Створення випадкової позиції в межах
-            float randomX = Random.Range(minX, maxX + 1);
-            float randomZ = Random.Range(minZ, maxZ + 1);
-
-            var randomRoad = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
-            randomRoad.gameObject.name = $"RandomRoad_{i}";
-            randomRoad.transform.position = new Vector3(randomX, 0, randomZ);
-            randomRoad.transform.parent = parent.transform;
-            _randomRoads.Add(randomRoad);
-
-            var targetPos = randomRoad.transform.position;
-
-            // Горизонтальне з'єднання по X
-            while (Mathf.Abs(currentRoadPosition.x - targetPos.x) > 0.1f)
-            {
-                var connectionRoad = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
-                connectionRoad.gameObject.name = "ConnectionRoad_X";
-                connectionRoad.transform.position = currentRoadPosition;
-                connectionRoad.transform.parent = parent.transform;
-
-                var directionX = targetPos.x > currentRoadPosition.x ? 1 : -1;
-                currentRoadPosition.x += directionX;
-            }
-
-            // Вертикальне з'єднання по Z
-            while (Mathf.Abs(currentRoadPosition.z - targetPos.z) > 0.1f)
-            {
-                var connectionRoad = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
-                connectionRoad.gameObject.name = "ConnectionRoad_Z";
-                connectionRoad.transform.position = currentRoadPosition;
-                connectionRoad.transform.parent = parent.transform;
-
-                var directionZ = targetPos.z > currentRoadPosition.z ? 1 : -1;
-                currentRoadPosition.z += directionZ;
-            }
-
-            // Переносимо точку для наступної побудови
-            currentRoadPosition = targetPos;
-        }
-
-        // Додаємо FinishRoad в кінець
-        var finishZ = Random.Range(-SizeZ + 1, SizeZ - 1);
+        // Фініш
+        int finishZ = Random.Range(-innerZ, innerZ + 1);
         var finishRoad = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
-        finishRoad.gameObject.name = "FinishRoad";
+        finishRoad.name = "FinishRoad";
         finishRoad.transform.position = new Vector3(SizeX, 0, finishZ);
         finishRoad.transform.parent = parent.transform;
 
-        var targetFinish = finishRoad.transform.position;
+        // Випадкові дороги з унікальним Z
+        HashSet<int> usedZ = new HashSet<int>();
 
-        // З'єднуємо останню RandomRoad з FinishRoad
-        while (Mathf.Abs(currentRoadPosition.x - targetFinish.x) > 0.1f)
+        Vector3 leftRandomPos;
+        do
         {
-            var connectionRoad = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
-            connectionRoad.gameObject.name = "ConnectionRoad_X";
-            connectionRoad.transform.position = currentRoadPosition;
-            connectionRoad.transform.parent = parent.transform;
+            int randX = Random.Range(-SizeX + 1, -SizeX + 1 + halfInnerX);
+            int randZ = Random.Range(-innerZ, innerZ + 1);
+            leftRandomPos = new Vector3(randX, 0, randZ);
+        } while (!usedZ.Add((int)leftRandomPos.z));
 
-            var directionX = targetFinish.x > currentRoadPosition.x ? 1 : -1;
-            currentRoadPosition.x += directionX;
-        }
-
-        while (Mathf.Abs(currentRoadPosition.z - targetFinish.z) > 0.1f)
+        Vector3 rightRandomPos;
+        do
         {
-            var connectionRoad = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
-            connectionRoad.gameObject.name = "ConnectionRoad_Z";
-            connectionRoad.transform.position = currentRoadPosition;
-            connectionRoad.transform.parent = parent.transform;
+            int randX = Random.Range(-SizeX + 1 + halfInnerX, SizeX);
+            int randZ = Random.Range(-innerZ, innerZ + 1);
+            rightRandomPos = new Vector3(randX, 0, randZ);
+        } while (!usedZ.Add((int)rightRandomPos.z));
 
-            var directionZ = targetFinish.z > currentRoadPosition.z ? 1 : -1;
-            currentRoadPosition.z += directionZ;
+        // Створення випадкових доріг
+        var leftRandom = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
+        leftRandom.name = "LeftRandomRoad";
+        leftRandom.transform.position = leftRandomPos;
+        leftRandom.transform.parent = parent.transform;
+
+        var rightRandom = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
+        rightRandom.name = "RightRandomRoad";
+        rightRandom.transform.position = rightRandomPos;
+        rightRandom.transform.parent = parent.transform;
+
+        // З’єднання Start → LeftRandom → RightRandom → Finish
+        ConnectPoints(startRoad.transform.position, leftRandomPos, parent);
+        ConnectPoints(leftRandomPos, rightRandomPos, parent);
+
+        // Спочатку до передфінішу (по X), не на SizeX
+        Vector3 preFinish = new Vector3(SizeX - 1, 0, finishZ);
+        ConnectPoints(rightRandomPos, preFinish, parent);
+
+        // Тепер від preFinish до Finish (по Z)
+        while (Mathf.Abs(preFinish.z - finishZ) > 0.1f)
+        {
+            var connection = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
+            connection.name = "FinalConnection_Z";
+            connection.transform.position = preFinish;
+            connection.transform.parent = parent.transform;
+
+            preFinish.z += finishZ > preFinish.z ? 1 : -1;
         }
 
         FillRemainingWithTiles(parent);
-
         Debug.Log("Tiles placed successfully!");
+    }
+
+    private void ConnectPoints(Vector3 from, Vector3 to, GameObject parent)
+    {
+        Vector3 current = from;
+
+        while (Mathf.Abs(current.x - to.x) > 0.1f)
+        {
+            current.x += current.x < to.x ? 1 : -1;
+
+            var road = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
+            road.name = "Connection_X";
+            road.transform.position = current;
+            road.transform.parent = parent.transform;
+        }
+
+        while (Mathf.Abs(current.z - to.z) > 0.1f)
+        {
+            current.z += current.z < to.z ? 1 : -1;
+
+            var road = (Road)PrefabUtility.InstantiatePrefab(RoadPrefab);
+            road.name = "Connection_Z";
+            road.transform.position = current;
+            road.transform.parent = parent.transform;
+        }
     }
 
     private void FillRemainingWithTiles(GameObject parent)
     {
-        // Збираємо всі координати, де вже є дорога
-        HashSet<Vector2> usedPositions = new HashSet<Vector2>();
-
+        HashSet<Vector2Int> occupied = new HashSet<Vector2Int>();
         foreach (Transform child in parent.transform)
         {
             Vector3 pos = child.position;
-            Vector2 gridPos = new Vector2(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z));
-            usedPositions.Add(gridPos);
+            Vector2Int gridPos = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z));
+            occupied.Add(gridPos);
         }
 
         for (int x = -SizeX; x <= SizeX; x++)
         {
             for (int z = -SizeZ; z <= SizeZ; z++)
             {
-                Vector2 gridPos = new Vector2(x, z);
+                Vector2Int pos = new Vector2Int(x, z);
+                if (occupied.Contains(pos)) continue;
 
-                if (!usedPositions.Contains(gridPos))
-                {
-                    var tile = (TileToPlace)PrefabUtility.InstantiatePrefab(TilePrefab);
-                    tile.name = $"Tile_{x}_{z}";
-                    tile.transform.position = new Vector3(x, 0, z);
-                    tile.transform.parent = parent.transform;
-                }
+                var tile = (TileToPlace)PrefabUtility.InstantiatePrefab(TilePrefab);
+                tile.name = $"Tile_{x}_{z}";
+                tile.transform.position = new Vector3(x, 0, z);
+                tile.transform.parent = parent.transform;
             }
         }
     }
