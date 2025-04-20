@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerBase : MonoBehaviour
 {
@@ -9,9 +10,8 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] private Transform _playerBasePoint;
     [SerializeField] private Transform _healthBarParent;
     [SerializeField] private Transform _healthBar;
-    [SerializeField] private int _health;
-    [SerializeField] private float _detectionRadius;
-
+    [SerializeField] private int _maxHealth;
+    
     private HealthBar _healthBarInstance;
     private int _currentHealth;
     
@@ -28,18 +28,14 @@ public class PlayerBase : MonoBehaviour
         
         _healthBarInstance.LookAtCamera(_healthBarParent);
         
-        _currentHealth = _health;
-    }
-    
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _detectionRadius);
+        _currentHealth = _maxHealth;
     }
 
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
+        
+        _healthBarInstance.ChangeHealthBar(_healthBar, _currentHealth, _maxHealth);
 
         if (_currentHealth <= 0)
         {

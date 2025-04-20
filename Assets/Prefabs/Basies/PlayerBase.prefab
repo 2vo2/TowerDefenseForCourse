@@ -352,8 +352,7 @@ MonoBehaviour:
   _playerBasePoint: {fileID: 212827315141511737}
   _healthBarParent: {fileID: 2076722787498623678}
   _healthBar: {fileID: 9101358335178114042}
-  _health: 100
-  _detectionRadius: 1
+  _maxHealth: 100
 --- !u!136 &2325949784610729483
 CapsuleCollider:
   m_ObjectHideFlags: 0

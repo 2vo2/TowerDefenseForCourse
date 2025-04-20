@@ -2,24 +2,19 @@ using UnityEngine;
 
 public class HealthBar
 {
-    public void LookAtCamera(Transform heathBarParent)
+    public void LookAtCamera(Transform healthBarParent)
     {
-        heathBarParent.LookAt(Camera.main.transform);
+        healthBarParent.LookAt(Camera.main.transform);
     }
 
-    public void ChangeHealthBar(Transform healthBar, float healthValue)
+    public void ChangeHealthBar(Transform healthBar, float currentHealth, float maxHealth)
     {
-        if (healthBar.transform.localScale.x <= 0f) return;
-        
-        var health = healthValue + 1;
-        
+        if (maxHealth <= 0f) return;
+
+        var healthPercentage = Mathf.Clamp01(currentHealth / maxHealth);
+
         var scale = healthBar.localScale;
-        scale.x -= healthBar.localScale.x / health;
+        scale.x = healthPercentage;
         healthBar.localScale = scale;
-    }
-
-    public void ChangeHealthBar(Transform healthBar)
-    {
-        
     }
 }

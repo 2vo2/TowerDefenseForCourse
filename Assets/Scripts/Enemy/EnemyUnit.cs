@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using SO;
 using UnityEngine;
@@ -11,7 +10,8 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField] private Transform _healthBarParent;
     [SerializeField] private Transform _healthBar;
     
-    private int _health;
+    private int _maxHealth;
+    private int _currentHealth;
     private HealthBar _healthBarInstance;
     private bool _isDie;
 
@@ -24,7 +24,8 @@ public class EnemyUnit : MonoBehaviour
     {
         _healthBarInstance = new HealthBar();
         
-        _health = _enemyData.Health;
+        _maxHealth = _enemyData.Health;
+        _currentHealth = _maxHealth;
     }
     
     private void Update()
@@ -36,11 +37,11 @@ public class EnemyUnit : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Projectile projectile))
         {
-            _health--;
+            _currentHealth--;
 
-            _healthBarInstance.ChangeHealthBar(_healthBar, _health);
+            _healthBarInstance.ChangeHealthBar(_healthBar, _currentHealth, _maxHealth);
 
-            if (_health <= 0)
+            if (_currentHealth <= 0)
             {
                 Die();
             }
@@ -54,6 +55,10 @@ public class EnemyUnit : MonoBehaviour
             if (playerBase.gameObject.activeSelf)
             {
                 StartCoroutine(Attack(playerBase));
+            }
+            else
+            {
+                StopCoroutine(Attack(playerBase));
             }
         }
     }
