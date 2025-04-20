@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using SO;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class EnemyBase : MonoBehaviour
 {
-    [FormerlySerializedAs("_enemyPrefab")] [SerializeField] private EnemyUnit _enemyUnitPrefab;
+    [SerializeField] private LevelWavesScriptableObject _levelWavesData;
+    [SerializeField] private EnemyUnit _enemyUnitPrefab;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private int _spawnSize;
     [SerializeField] private float _spawnDelay;
@@ -18,33 +20,47 @@ public class EnemyBase : MonoBehaviour
 
     private void Start()
     {
-        for (var i = 0; i < _spawnSize; i++)
+        for (var i = 0; i < _levelWavesData.Waves.Count; i++)
         {
-            CreateNewEnemy();
+            for (var j = 0; j < _spawnSize; j++)
+            {
+                
+            }
         }
 
-        StartCoroutine(SpawnEnemies());
+        //StartCoroutine(SpawnEnemies());
     }
 
-    private IEnumerator SpawnEnemies()
+    private EnemyUnit CreateNewEnemy(EnemyUnit enemyUnit)
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(_spawnDelay);
+        var newEnemy = Instantiate(enemyUnit, _spawnPoint.position, _spawnPoint.rotation, transform);
+        newEnemy.gameObject.SetActive(false);
+        _enemies.Add(newEnemy);
+        
+        EnemySpawned?.Invoke(newEnemy);
 
-            var enemy = GetInactiveEnemy();
-
-            if (enemy != null && !enemy.IsDie)
-            {
-                enemy.gameObject.SetActive(true);
-            }
-            else
-            {
-                var newEnemy = CreateNewEnemy();
-                newEnemy.gameObject.SetActive(true);
-            }
-        }
+        return newEnemy;
     }
+
+    // private IEnumerator SpawnEnemies()
+    // {
+    //     while (true)
+    //     {
+    //         yield return new WaitForSeconds(_spawnDelay);
+    //
+    //         var enemy = GetInactiveEnemy();
+    //
+    //         if (enemy != null && !enemy.IsDie)
+    //         {
+    //             enemy.gameObject.SetActive(true);
+    //         }
+    //         else
+    //         {
+    //             var newEnemy = CreateNewEnemy();
+    //             newEnemy.gameObject.SetActive(true);
+    //         }
+    //     }
+    // }
 
     private EnemyUnit GetInactiveEnemy()
     {
@@ -58,16 +74,5 @@ public class EnemyBase : MonoBehaviour
         }
 
         return null;
-    }
-
-    private EnemyUnit CreateNewEnemy()
-    {
-        var newEnemy = Instantiate(_enemyUnitPrefab, _spawnPoint.position, _spawnPoint.rotation, transform);
-        newEnemy.gameObject.SetActive(false);
-        _enemies.Add(newEnemy);
-        
-        EnemySpawned?.Invoke(newEnemy);
-
-        return newEnemy;
     }
 }

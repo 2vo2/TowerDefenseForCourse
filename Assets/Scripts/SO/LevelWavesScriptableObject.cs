@@ -5,16 +5,10 @@ using UnityEngine;
 namespace SO
 {
     [Serializable]
-    public class InstanceWaveSettings
+    public class LevelWaveSettings
     {
         public float WaveDuration;
         public EnemyUnit EnemyType;
-    }
-    
-    [Serializable]
-    public class LevelWaveSettings
-    {
-        public List<InstanceWaveSettings> WaveCount;
     }
     
     [CreateAssetMenu(fileName = "New Level Waves Data", menuName = "Level Waves", order = 0)]
