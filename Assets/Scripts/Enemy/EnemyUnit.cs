@@ -1,30 +1,30 @@
 using System;
 using System.Collections;
+using SO;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EnemyUnit : MonoBehaviour
 {
-    [SerializeField] private int _health;
-    [SerializeField] private float _attackDelay;
+    [SerializeField] private EnemyUnitScriptableObject _enemyData;
     [SerializeField] private Transform _pointToHit;
     [SerializeField] private Transform _healthBarParent;
     [SerializeField] private Transform _healthBar;
-    [SerializeField] private int _rewardForKill;
     
+    private int _health;
     private HealthBar _healthBarInstance;
     private bool _isDie;
-    private bool _isAttack;
 
     public event UnityAction<int> EnemyDied;
     
     public bool IsDie => _isDie;
-    public bool IsAttack => _isAttack;
     public Transform PointToHit => _pointToHit;
 
     private void Awake()
     {
         _healthBarInstance = new HealthBar();
+        
+        _health = _enemyData.Health;
     }
     
     private void Update()
@@ -51,9 +51,9 @@ public class EnemyUnit : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerBase playerBase))
         {
-            if (!_isAttack)
+            if (playerBase.gameObject.activeSelf)
             {
-                StartCoroutine(Attack());
+                StartCoroutine(Attack(playerBase));
             }
         }
     }
@@ -62,28 +62,25 @@ public class EnemyUnit : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerBase playerBase))
         {
-            StopCoroutine(Attack());
+            StopCoroutine(Attack(playerBase));
         }
     }
 
-    private IEnumerator Attack()
+    private IEnumerator Attack(PlayerBase playerBase)
     {
         while (true)
         {
-            _isAttack = true;
-        
-            yield return new WaitForSeconds(_attackDelay);
-            
-            _isAttack = false;   
+            playerBase.TakeDamage(_enemyData.Damage);
+            yield return new WaitForSeconds(_enemyData.AttackDelay);
         }
     }
     
     private void Die()
     {
         _isDie = true;
-        EnemyDied?.Invoke(_rewardForKill);
+        EnemyDied?.Invoke(_enemyData.RewardForKill);
         
-        StopCoroutine(Attack());
+        StopAllCoroutines();
         
         gameObject.SetActive(false);
     }

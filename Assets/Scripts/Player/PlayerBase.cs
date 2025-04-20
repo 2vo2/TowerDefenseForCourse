@@ -13,9 +13,7 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] private float _detectionRadius;
 
     private HealthBar _healthBarInstance;
-    private EnemyDetector _enemyDetector;
-
-    private EnemyUnit _currentEnemyUnit;
+    private int _currentHealth;
     
     public Transform PlayerBasePoint => _playerBasePoint;
     
@@ -27,29 +25,25 @@ public class PlayerBase : MonoBehaviour
             Destroy(this);
 
         _healthBarInstance = new HealthBar();
-        _enemyDetector = new EnemyDetector();
         
         _healthBarInstance.LookAtCamera(_healthBarParent);
-    }
-
-    private void Update()
-    {
-        if (!_currentEnemyUnit)
-        {
-            _currentEnemyUnit = _enemyDetector.DetectEnemy(transform.position, _detectionRadius);
-        }
-        else
-        {
-            if (_currentEnemyUnit.IsAttack)
-            {
-                _healthBarInstance.ChangeHealthBar(_healthBar, _health);
-            }
-        }
+        
+        _currentHealth = _health;
     }
     
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _detectionRadius);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _currentHealth -= damage;
+
+        if (_currentHealth <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -350,12 +350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c4366a52cd1b3d469839938ecf9d126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 5
-  _attackDelay: 1
+  _enemyData: {fileID: 11400000, guid: 3a09b167927889b419d24c260b093d5f, type: 2}
   _pointToHit: {fileID: 1803411752357764686}
   _healthBarParent: {fileID: 2395554043602635987}
   _healthBar: {fileID: 6544687557732613761}
-  _rewardForKill: 5
 --- !u!136 &8337905450937315483
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -413,8 +411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f976ce368bff496e860ffd5e822394ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyData: {fileID: 11400000, guid: 3a09b167927889b419d24c260b093d5f, type: 2}
   _navMeshAgent: {fileID: 7517430932137962066}
-  _speed: 1
 --- !u!1001 &3087728808514985335
 PrefabInstance:
   m_ObjectHideFlags: 0

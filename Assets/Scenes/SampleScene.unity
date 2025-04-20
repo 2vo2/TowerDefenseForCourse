@@ -2211,7 +2211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameUI: {fileID: 178915658}
-  _enemySpawner: {fileID: 1138185109}
+  _enemyBase: {fileID: 1138185109}
   _delay: 0.5
 --- !u!1001 &333918553
 PrefabInstance:
