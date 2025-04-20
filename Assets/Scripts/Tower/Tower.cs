@@ -13,7 +13,7 @@ public class Tower : MonoBehaviour
     private float _shootForce;
     private Projectile _projectile;
     
-    private Enemy _currentEnemy;
+    private EnemyUnit _currentEnemyUnit;
     private float _attackTimer;
     
     private void Awake()
@@ -31,25 +31,25 @@ public class Tower : MonoBehaviour
     {
         _attackTimer += Time.deltaTime;
     
-        if (!_currentEnemy && TowerPlacer.Instance.IsTowerPlaced)
+        if (!_currentEnemyUnit && TowerPlacer.Instance.IsTowerPlaced)
         {
-            _currentEnemy = _enemyDetector.DetectEnemy(transform.position, _shootRadius);
+            _currentEnemyUnit = _enemyDetector.DetectEnemy(transform.position, _shootRadius);
         }
         
-        if (_currentEnemy && _currentEnemy.IsDie)
+        if (_currentEnemyUnit && _currentEnemyUnit.IsDie)
         {
-            _currentEnemy = null;
+            _currentEnemyUnit = null;
             return;
         }
 
-        if (_attackTimer >= _shootSpeed && _currentEnemy)
+        if (_attackTimer >= _shootSpeed && _currentEnemyUnit)
         {
             Shoot();
             _attackTimer = 0;
 
-            if (!_enemyDetector.IsEnemyInRange(transform.position, _currentEnemy, _shootRadius))
+            if (!_enemyDetector.IsEnemyInRange(transform.position, _currentEnemyUnit, _shootRadius))
             {
-                _currentEnemy = null;
+                _currentEnemyUnit = null;
             }
         }
     }
@@ -58,7 +58,7 @@ public class Tower : MonoBehaviour
     private void Shoot()
     {
         var newProjectile = Instantiate(_projectile, _projectileSpawnPoint.position, Quaternion.identity, transform);
-        var shootDirection = _currentEnemy.PointToHit.transform.position - _projectileSpawnPoint.position;
+        var shootDirection = _currentEnemyUnit.PointToHit.transform.position - _projectileSpawnPoint.position;
 
         _towerShooter.Shoot(newProjectile, shootDirection, _shootForce);
     }

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour
+public class EnemyUnit : MonoBehaviour
 {
     [SerializeField] private int _health;
     [SerializeField] private float _attackDelay;

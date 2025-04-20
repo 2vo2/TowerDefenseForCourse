@@ -10,7 +10,7 @@ public class TileGridGenerator : EditorWindow
     [SerializeField] private TileToPlace _tilePrefab;
     [SerializeField] private Road _roadPrefab;
     [SerializeField] private PlayerBase _playerBase;
-    [SerializeField] private EnemySpawner _enemySpawner;
+    [FormerlySerializedAs("_enemySpawner")] [SerializeField] private EnemyBase _enemyBase;
 
     private List<Road> _randomRoads;
 
@@ -27,7 +27,7 @@ public class TileGridGenerator : EditorWindow
         _tilePrefab = (TileToPlace)EditorGUILayout.ObjectField("Tile Prefab", _tilePrefab, typeof(TileToPlace), false);
         _roadPrefab = (Road)EditorGUILayout.ObjectField("Road Prefab", _roadPrefab, typeof(Road), false);
         _playerBase = (PlayerBase)EditorGUILayout.ObjectField("Player Base", _playerBase, typeof(PlayerBase), false);
-        _enemySpawner = (EnemySpawner)EditorGUILayout.ObjectField("Enemy Base", _enemySpawner, typeof(EnemySpawner), false);
+        _enemyBase = (EnemyBase)EditorGUILayout.ObjectField("Enemy Base", _enemyBase, typeof(EnemyBase), false);
 
         if (GUILayout.Button("Generate Grid"))
         {
@@ -56,7 +56,7 @@ public class TileGridGenerator : EditorWindow
         startRoad.transform.position = new Vector3(-_sizeX, 0, startZ);
         startRoad.transform.parent = parent.transform;
 
-        var enemyBase = (EnemySpawner)PrefabUtility.InstantiatePrefab(_enemySpawner);
+        var enemyBase = (EnemyBase)PrefabUtility.InstantiatePrefab(_enemyBase);
         enemyBase.transform.position = new Vector3(-_sizeX - 1, 0, startZ);
         
         // Фініш

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
@@ -14,7 +15,7 @@ public class PlayerBase : MonoBehaviour
     private HealthBar _healthBarInstance;
     private EnemyDetector _enemyDetector;
 
-    private Enemy _currentEnemy;
+    private EnemyUnit _currentEnemyUnit;
     
     public Transform PlayerBasePoint => _playerBasePoint;
     
@@ -33,13 +34,13 @@ public class PlayerBase : MonoBehaviour
 
     private void Update()
     {
-        if (!_currentEnemy)
+        if (!_currentEnemyUnit)
         {
-            _currentEnemy = _enemyDetector.DetectEnemy(transform.position, _detectionRadius);
+            _currentEnemyUnit = _enemyDetector.DetectEnemy(transform.position, _detectionRadius);
         }
         else
         {
-            if (_currentEnemy.IsAttack)
+            if (_currentEnemyUnit.IsAttack)
             {
                 _healthBarInstance.ChangeHealthBar(_healthBar, _health);
             }

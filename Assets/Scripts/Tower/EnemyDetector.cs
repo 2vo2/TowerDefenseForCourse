@@ -2,13 +2,13 @@
 
 public class EnemyDetector
 {
-    public Enemy DetectEnemy(Vector3 position, float radius)
+    public EnemyUnit DetectEnemy(Vector3 position, float radius)
     {
         var enemies = Physics.OverlapSphere(position, radius);
 
         foreach (var enemyInScene in enemies)
         {
-            if (enemyInScene.gameObject.TryGetComponent(out Enemy enemy))
+            if (enemyInScene.gameObject.TryGetComponent(out EnemyUnit enemy))
             {
                 return !enemy.IsDie ? enemy : null;
             }
@@ -17,9 +17,9 @@ public class EnemyDetector
         return null;
     }
     
-    public bool IsEnemyInRange(Vector3 towerPosition, Enemy enemy, float radius)
+    public bool IsEnemyInRange(Vector3 towerPosition, EnemyUnit enemyUnit, float radius)
     {
-        return Vector3.Distance(towerPosition, enemy.transform.position) <= radius;
+        return Vector3.Distance(towerPosition, enemyUnit.transform.position) <= radius;
     }
 
 }

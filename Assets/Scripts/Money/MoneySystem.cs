@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MoneySystem : MonoBehaviour
 {
     [SerializeField] private GameInterface _gameUI;
-    [SerializeField] private EnemySpawner _enemySpawner;
+    [FormerlySerializedAs("_enemySpawner")] [SerializeField] private EnemyBase _enemyBase;
     [SerializeField] private float _delay;
 
     private int _moneyValue;
@@ -14,12 +15,12 @@ public class MoneySystem : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (var enemy in _enemySpawner.Enemies)
+        foreach (var enemy in _enemyBase.Enemies)
         {
             enemy.EnemyDied += OnEnemyDied;
         }
 
-        _enemySpawner.EnemySpawned += OnNewEnemySpawned;
+        _enemyBase.EnemySpawned += OnNewEnemySpawned;
     }
 
     private void Start()
@@ -29,17 +30,17 @@ public class MoneySystem : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach (var enemy in _enemySpawner.Enemies)
+        foreach (var enemy in _enemyBase.Enemies)
         {
             enemy.EnemyDied -= OnEnemyDied;
         }
 
-        _enemySpawner.EnemySpawned -= OnNewEnemySpawned;
+        _enemyBase.EnemySpawned -= OnNewEnemySpawned;
     }
 
-    private void OnNewEnemySpawned(Enemy newEnemy)
+    private void OnNewEnemySpawned(EnemyUnit newEnemyUnit)
     {
-        newEnemy.EnemyDied += OnEnemyDied;
+        newEnemyUnit.EnemyDied += OnEnemyDied;
     }
 
     private IEnumerator AddMoneyPerSeconds()

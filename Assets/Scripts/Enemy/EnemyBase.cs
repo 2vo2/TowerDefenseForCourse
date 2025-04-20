@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] private Enemy _enemyPrefab;
+    [FormerlySerializedAs("_enemyPrefab")] [SerializeField] private EnemyUnit _enemyUnitPrefab;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private int _spawnSize;
     [SerializeField] private float _spawnDelay;
 
-    private List<Enemy> _enemies = new List<Enemy>();
+    private List<EnemyUnit> _enemies = new List<EnemyUnit>();
 
-    public List<Enemy> Enemies => _enemies;
-    public event UnityAction<Enemy> EnemySpawned;
+    public List<EnemyUnit> Enemies => _enemies;
+    public event UnityAction<EnemyUnit> EnemySpawned;
 
     private void Start()
     {
@@ -45,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private Enemy GetInactiveEnemy()
+    private EnemyUnit GetInactiveEnemy()
     {
         foreach (var enemy in _enemies)
         {
@@ -59,9 +60,9 @@ public class EnemySpawner : MonoBehaviour
         return null;
     }
 
-    private Enemy CreateNewEnemy()
+    private EnemyUnit CreateNewEnemy()
     {
-        var newEnemy = Instantiate(_enemyPrefab, _spawnPoint.position, _spawnPoint.rotation, transform);
+        var newEnemy = Instantiate(_enemyUnitPrefab, _spawnPoint.position, _spawnPoint.rotation, transform);
         newEnemy.gameObject.SetActive(false);
         _enemies.Add(newEnemy);
         
