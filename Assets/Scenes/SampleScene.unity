@@ -2212,7 +2212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameUI: {fileID: 178915658}
   _enemyBase: {fileID: 1138185109}
-  _delay: 0.5
+  _delay: 1.5
 --- !u!1001 &333918553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8063,6 +8063,10 @@ PrefabInstance:
     - target: {fileID: 6288820139496716601, guid: b81fbd6ec2a0c9e4fb52a58f694962ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417382927297641684, guid: b81fbd6ec2a0c9e4fb52a58f694962ca, type: 3}
+      propertyPath: _spawnDelay
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
