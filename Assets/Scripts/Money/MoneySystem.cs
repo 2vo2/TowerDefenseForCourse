@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 public class MoneySystem : MonoBehaviour
 {
     [SerializeField] private GameInterface _gameUI;
-    [FormerlySerializedAs("_enemySpawner")] [SerializeField] private EnemyBase _enemyBase;
+    [SerializeField] private EnemyBase _enemyBase;
     [SerializeField] private float _delay;
 
     private int _moneyValue;
@@ -15,9 +15,12 @@ public class MoneySystem : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (var enemy in _enemyBase.Enemies)
+        foreach (var wave in _enemyBase.WaveEnemies.Values)
         {
-            enemy.EnemyDied += OnEnemyDied;
+            foreach (var enemy in wave)
+            {
+                enemy.EnemyDied += OnEnemyDied;
+            }
         }
 
         _enemyBase.EnemySpawned += OnNewEnemySpawned;
@@ -30,9 +33,12 @@ public class MoneySystem : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach (var enemy in _enemyBase.Enemies)
+        foreach (var wave in _enemyBase.WaveEnemies.Values)
         {
-            enemy.EnemyDied -= OnEnemyDied;
+            foreach (var enemy in wave)
+            {
+                enemy.EnemyDied -= OnEnemyDied;
+            }
         }
 
         _enemyBase.EnemySpawned -= OnNewEnemySpawned;
