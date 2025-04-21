@@ -11,6 +11,8 @@ public class GameInterface : MonoBehaviour
     private VisualElement _root;
     private Label _moneyLabel;
     private Label _waveLabel;
+    private Label _waveDurationLabel;
+    private Label _pauseAfterWaveLabel;
 
     public Label MoneyLabel => _moneyLabel;
 
@@ -22,6 +24,9 @@ public class GameInterface : MonoBehaviour
 
         _moneyLabel = _root.Q<Label>("MoneyLabel");
         _waveLabel = _root.Q<Label>("WaveLabel");
+        _waveDurationLabel = _root.Q<Label>("WaveDurationLabel");
+        _pauseAfterWaveLabel = _root.Q<Label>("PauseAfterWaveLabel");
+        
         var buttons = _root.Query<Button>().Class("unity-button").Build();
 
         buttons.ForEach(button =>
@@ -33,16 +38,31 @@ public class GameInterface : MonoBehaviour
     private void OnEnable()
     {
         _enemyBase.WaveActivated += OnWaveActivated;
+        _enemyBase.TimeLeft += OnTimeLeft;
+        _enemyBase.PauseAfterWave += OnPauseAfterWave;
     }
 
     private void OnDisable()
     {
         _enemyBase.WaveActivated -= OnWaveActivated;
+        _enemyBase.TimeLeft -= OnTimeLeft;
+        _enemyBase.PauseAfterWave -= OnPauseAfterWave;
     }
 
     private void OnWaveActivated(int waveIndex, int waveCount)
     {
         _waveLabel.text = $"Wave: {waveIndex + 1}/{waveCount}";
+    }
+
+    private void OnTimeLeft(float waveTimeLeft)
+    {
+        _waveDurationLabel.text = $"Duration: {waveTimeLeft:F0}";
+    }
+
+    private void OnPauseAfterWave(float pauseDuration, bool pause)
+    {
+        _pauseAfterWaveLabel.visible = pause;
+        _pauseAfterWaveLabel.text = $"Pause: {pauseDuration:F0}";
     }
     
     private void OnTowerButtonClick(ClickEvent evt)

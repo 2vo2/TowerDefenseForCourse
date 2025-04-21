@@ -15,7 +15,9 @@ public class EnemyBase : MonoBehaviour
 
     public Dictionary<int, List<EnemyUnit>> WaveEnemies => _waveEnemies;
     public event UnityAction<EnemyUnit> EnemySpawned;
-    public event UnityAction<int, int> WaveActivated; 
+    public event UnityAction<int, int> WaveActivated;
+    public event UnityAction<float> TimeLeft; 
+    public event UnityAction<float, bool> PauseAfterWave;
 
     private void Start()
     {
@@ -76,6 +78,9 @@ public class EnemyBase : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 spawnTimer += Time.deltaTime;
                 
+                var timeLeft = Mathf.Max(0f, waveDuration - elapsedTime);
+                TimeLeft?.Invoke(timeLeft);
+                
                 if (spawnTimer >= enemySpawnDelay)
                 {
                     spawnTimer = 0f;
@@ -96,7 +101,19 @@ public class EnemyBase : MonoBehaviour
                 yield return null;
             }
             
-            yield return new WaitForSeconds(pauseAfterWave);
+            var pauseElapsed = 0f;
+
+            while (pauseElapsed < pauseAfterWave)
+            {
+                pauseElapsed += Time.deltaTime;
+                var pauseTimeLeft = Mathf.Max(0f, pauseAfterWave - pauseElapsed);
+
+                PauseAfterWave?.Invoke(pauseTimeLeft, true);
+                
+                yield return null;
+                
+                PauseAfterWave?.Invoke(0f, false);
+            }
         }
     }
 
