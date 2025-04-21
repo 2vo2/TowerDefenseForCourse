@@ -62,6 +62,7 @@ public class EnemyBase : MonoBehaviour
         {
             var waveDuration = _levelWavesData.Waves[i].WaveDuration;
             var enemyType = _levelWavesData.Waves[i].EnemyType;
+            var pauseAfterWave = _levelWavesData.Waves[i].PauseAfterWave;
             var parent = _wavesParent[i].transform;
 
             var elapsedTime = 0f;
@@ -93,6 +94,8 @@ public class EnemyBase : MonoBehaviour
 
                 yield return null;
             }
+            
+            yield return new WaitForSeconds(pauseAfterWave);
         }
     }
 

@@ -9,6 +9,7 @@ namespace SO
     {
         public float WaveDuration;
         public EnemyUnit EnemyType;
+        public float PauseAfterWave;
     }
     
     [CreateAssetMenu(fileName = "New Level Waves Data", menuName = "Level Waves", order = 0)]
