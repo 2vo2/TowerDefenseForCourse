@@ -15,6 +15,7 @@ public class EnemyBase : MonoBehaviour
 
     public Dictionary<int, List<EnemyUnit>> WaveEnemies => _waveEnemies;
     public event UnityAction<EnemyUnit> EnemySpawned;
+    public event UnityAction<int, int> WaveActivated; 
 
     private void Start()
     {
@@ -67,6 +68,8 @@ public class EnemyBase : MonoBehaviour
 
             var elapsedTime = 0f;
             var spawnTimer = 0f;
+            
+            WaveActivated?.Invoke(i, _levelWavesData.Waves.Count);
 
             while (elapsedTime < waveDuration)
             {

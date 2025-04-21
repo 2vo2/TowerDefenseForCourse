@@ -1114,6 +1114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameInterface: {fileID: 178915656}
+  _enemyBase: {fileID: 1138185109}
 --- !u!1001 &204984498
 PrefabInstance:
   m_ObjectHideFlags: 0
