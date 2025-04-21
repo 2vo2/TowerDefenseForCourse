@@ -9,7 +9,6 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private LevelWavesScriptableObject _levelWavesData;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private int _spawnSize;
-    [SerializeField] private float _spawnDelay;
     
     private List<GameObject> _wavesParent = new List<GameObject>();
     private Dictionary<int, List<EnemyUnit>> _waveEnemies = new Dictionary<int, List<EnemyUnit>>();
@@ -62,20 +61,19 @@ public class EnemyBase : MonoBehaviour
         {
             var waveDuration = _levelWavesData.Waves[i].WaveDuration;
             var enemyType = _levelWavesData.Waves[i].EnemyType;
+            var enemySpawnDelay = _levelWavesData.Waves[i].EnemySpawnDelay;
             var pauseAfterWave = _levelWavesData.Waves[i].PauseAfterWave;
             var parent = _wavesParent[i].transform;
 
             var elapsedTime = 0f;
             var spawnTimer = 0f;
 
-            print($"Activating enemies from wave {i}");
-
             while (elapsedTime < waveDuration)
             {
                 elapsedTime += Time.deltaTime;
                 spawnTimer += Time.deltaTime;
                 
-                if (spawnTimer >= _spawnDelay)
+                if (spawnTimer >= enemySpawnDelay)
                 {
                     spawnTimer = 0f;
 

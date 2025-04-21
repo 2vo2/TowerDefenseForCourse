@@ -9,6 +9,7 @@ namespace SO
     {
         public float WaveDuration;
         public EnemyUnit EnemyType;
+        public float EnemySpawnDelay;
         public float PauseAfterWave;
     }
     
