@@ -16,4 +16,4 @@ MonoBehaviour:
   _attackDelay: 2
   _damage: 5
   _speed: 2
-  _rewardForKill: 1
+  _rewardForKill: 3
