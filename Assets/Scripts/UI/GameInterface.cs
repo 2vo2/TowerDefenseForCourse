@@ -16,7 +16,7 @@ public class GameInterface : MonoBehaviour
 
     public Label MoneyLabel => _moneyLabel;
 
-    public event UnityAction OnButtonClick;
+    public event UnityAction<int> OnButtonClick;
 
     private void Awake()
     {
@@ -67,6 +67,17 @@ public class GameInterface : MonoBehaviour
     
     private void OnTowerButtonClick(ClickEvent evt)
     {
-        OnButtonClick?.Invoke();
+        var button = evt.target as Button;
+        if (button == null) return;
+
+        var name = button.name;
+        if (name.StartsWith("TowerButton-"))
+        {
+            var indexStr = name.Replace("TowerButton-", "");
+            if (int.TryParse(indexStr, out var index))
+            {
+                OnButtonClick?.Invoke(index - 1);
+            }
+        }
     }
 }

@@ -2198,7 +2198,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameInterface: {fileID: 178915658}
   _moneySystem: {fileID: 330585549}
-  _towerPrefab: {fileID: 3292911561796495234, guid: 77ad9b7cd274ff0439f96dcf52a0b1a6, type: 3}
+  _towerPrefabs:
+  - {fileID: 3292911561796495234, guid: 77ad9b7cd274ff0439f96dcf52a0b1a6, type: 3}
+  - {fileID: 3292911561796495234, guid: 5661523c26575be47b68f75f6598e882, type: 3}
+  - {fileID: 3292911561796495234, guid: 6d07425718c0d514c889d07490e78223, type: 3}
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2213,7 +2216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameUI: {fileID: 178915658}
   _enemyBase: {fileID: 1138185109}
-  _delay: 1
+  _delay: 0.1
 --- !u!1001 &333918553
 PrefabInstance:
   m_ObjectHideFlags: 0

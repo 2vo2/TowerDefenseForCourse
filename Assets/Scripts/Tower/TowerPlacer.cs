@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class TowerPlacer : MonoBehaviour
@@ -7,7 +8,7 @@ public class TowerPlacer : MonoBehaviour
     
     [SerializeField] private GameInterface _gameInterface;
     [SerializeField] private MoneySystem _moneySystem;
-    [SerializeField] private Tower _towerPrefab;
+    [SerializeField] private List<Tower> _towerPrefabs;
 
     private Tower _activeTower;
     private bool _towerSpawned;
@@ -38,13 +39,13 @@ public class TowerPlacer : MonoBehaviour
         _gameInterface.OnButtonClick -= OnButtonClick;
     }
 
-    private void OnButtonClick()
+    private void OnButtonClick(int index)
     {
         if (_moneySystem.MoneyValue >= 10)
         {
             _moneySystem.DeductMoney(10);
             
-            _activeTower = Instantiate(_towerPrefab, SpawnPosition(), Quaternion.identity);
+            _activeTower = Instantiate(_towerPrefabs[index], SpawnPosition(), Quaternion.identity);
             _towerSpawned = true;
             _isTowerPlaced = false;
         }

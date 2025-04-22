@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22728188d8304824924926a3cf25ceb3, type: 3}
+  m_Name: CannonTower
+  m_EditorClassIdentifier: 
+  _shootRadius: 3
+  _shootSpeed: 3
+  _shootForce: 300
+  _projectile: {fileID: 2631634825544250438, guid: 543d52d96e75a4342b6d4fd1097167b9, type: 3}
