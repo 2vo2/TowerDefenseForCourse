@@ -37,7 +37,7 @@ public class EnemyUnit : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Projectile projectile))
         {
-            _currentHealth--;
+            _currentHealth -= projectile.Damage;
 
             _healthBarInstance.ChangeHealthBar(_healthBar, _currentHealth, _maxHealth);
 
