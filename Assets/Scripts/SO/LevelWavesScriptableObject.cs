@@ -7,8 +7,8 @@ namespace SO
     [Serializable]
     public class LevelWaveSettings
     {
-        public float WaveDuration;
         public EnemyUnit EnemyType;
+        public int EnemiesCount;
         public float EnemySpawnDelay;
         public float PauseAfterWave;
     }

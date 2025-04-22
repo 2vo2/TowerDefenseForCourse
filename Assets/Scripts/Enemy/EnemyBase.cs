@@ -16,7 +16,7 @@ public class EnemyBase : MonoBehaviour
     public Dictionary<int, List<EnemyUnit>> WaveEnemies => _waveEnemies;
     public event UnityAction<EnemyUnit> EnemySpawned;
     public event UnityAction<int, int> WaveActivated;
-    public event UnityAction<float> TimeLeft; 
+    public event UnityAction<int> EnemyLeft; 
     public event UnityAction<float, bool> PauseAfterWave;
 
     private void Start()
@@ -26,7 +26,7 @@ public class EnemyBase : MonoBehaviour
             var newWaveParent = SpawnWaveParent(i);
             _wavesParent.Add(newWaveParent);
             
-            for (var j = 0; j < _spawnSize; j++)
+            for (var j = 0; j < _levelWavesData.Waves[i].EnemiesCount; j++)
             {
                 CreateNewEnemy(_levelWavesData.Waves[i].EnemyType, newWaveParent.transform, i);
             }
@@ -62,24 +62,21 @@ public class EnemyBase : MonoBehaviour
     {
         for (var i = 0; i < _levelWavesData.Waves.Count; i++)
         {
-            var waveDuration = _levelWavesData.Waves[i].WaveDuration;
+            var enemiesCount = _levelWavesData.Waves[i].EnemiesCount;
             var enemyType = _levelWavesData.Waves[i].EnemyType;
             var enemySpawnDelay = _levelWavesData.Waves[i].EnemySpawnDelay;
             var pauseAfterWave = _levelWavesData.Waves[i].PauseAfterWave;
             var parent = _wavesParent[i].transform;
 
-            var elapsedTime = 0f;
+            var spawned = 0;
             var spawnTimer = 0f;
             
             WaveActivated?.Invoke(i, _levelWavesData.Waves.Count);
+            EnemyLeft?.Invoke(enemiesCount);
 
-            while (elapsedTime < waveDuration)
+            while (spawned < enemiesCount)
             {
-                elapsedTime += Time.deltaTime;
                 spawnTimer += Time.deltaTime;
-                
-                var timeLeft = Mathf.Max(0f, waveDuration - elapsedTime);
-                TimeLeft?.Invoke(timeLeft);
                 
                 if (spawnTimer >= enemySpawnDelay)
                 {
@@ -96,6 +93,11 @@ public class EnemyBase : MonoBehaviour
                         var newEnemy = CreateNewEnemy(enemyType, parent, i);
                         newEnemy.gameObject.SetActive(true);
                     }
+                    
+                    spawned++;
+                    
+                    var enemiesLeft = Mathf.Max(0, enemiesCount - spawned);
+                    EnemyLeft?.Invoke(enemiesLeft);
                 }
 
                 yield return null;

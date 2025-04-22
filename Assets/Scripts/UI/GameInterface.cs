@@ -11,7 +11,7 @@ public class GameInterface : MonoBehaviour
     private VisualElement _root;
     private Label _moneyLabel;
     private Label _waveLabel;
-    private Label _waveDurationLabel;
+    private Label _enemiesCountLabel;
     private Label _pauseAfterWaveLabel;
 
     public Label MoneyLabel => _moneyLabel;
@@ -24,7 +24,7 @@ public class GameInterface : MonoBehaviour
 
         _moneyLabel = _root.Q<Label>("MoneyLabel");
         _waveLabel = _root.Q<Label>("WaveLabel");
-        _waveDurationLabel = _root.Q<Label>("WaveDurationLabel");
+        _enemiesCountLabel = _root.Q<Label>("EnemiesCountLabel");
         _pauseAfterWaveLabel = _root.Q<Label>("PauseAfterWaveLabel");
         
         var buttons = _root.Query<Button>().Class("unity-button").Build();
@@ -38,14 +38,14 @@ public class GameInterface : MonoBehaviour
     private void OnEnable()
     {
         _enemyBase.WaveActivated += OnWaveActivated;
-        _enemyBase.TimeLeft += OnTimeLeft;
+        _enemyBase.EnemyLeft += OnEnemyLeft;
         _enemyBase.PauseAfterWave += OnPauseAfterWave;
     }
 
     private void OnDisable()
     {
         _enemyBase.WaveActivated -= OnWaveActivated;
-        _enemyBase.TimeLeft -= OnTimeLeft;
+        _enemyBase.EnemyLeft -= OnEnemyLeft;
         _enemyBase.PauseAfterWave -= OnPauseAfterWave;
     }
 
@@ -54,9 +54,9 @@ public class GameInterface : MonoBehaviour
         _waveLabel.text = $"Wave: {waveIndex + 1}/{waveCount}";
     }
 
-    private void OnTimeLeft(float waveTimeLeft)
+    private void OnEnemyLeft(int enemiesLeft)
     {
-        _waveDurationLabel.text = $"Duration: {waveTimeLeft:F0}";
+        _enemiesCountLabel.text = $"Enemies: {enemiesLeft:F0}";
     }
 
     private void OnPauseAfterWave(float pauseDuration, bool pause)

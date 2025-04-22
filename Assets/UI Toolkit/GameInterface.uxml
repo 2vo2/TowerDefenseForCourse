@@ -4,10 +4,10 @@
         <engine:VisualElement name="WavesInfo" style="flex-grow: 1; flex-direction: column; height: 1px; width: auto; align-items: center; justify-content: space-between;">
             <engine:VisualElement name="WaveCountDuration" style="flex-grow: 1; flex-direction: row; align-self: stretch; justify-content: center; height: 0;">
                 <engine:Label text="Wave: 0" name="WaveLabel" style="font-size: 24px; align-self: flex-start; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-align: lower-left;" />
-                <engine:Label text="Duration: 0" name="WaveDurationLabel" style="font-size: 24px; align-self: flex-start; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-align: lower-left;" />
+                <engine:Label text="Enemies: 0" name="EnemiesCountLabel" style="font-size: 24px; align-self: flex-start; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-align: lower-left;" />
             </engine:VisualElement>
             <engine:VisualElement name="PauseAfterWave" style="flex-grow: 1; flex-direction: row; height: 345px; width: auto; align-items: stretch; justify-content: center; align-self: stretch;">
-                <engine:Label text="Pause: 0" name="PauseAfterWaveLabel" enabled="true" style="font-size: 24px; align-self: flex-start; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-align: lower-left; display: none;" />
+                <engine:Label text="Pause: 0" name="PauseAfterWaveLabel" enabled="true" style="font-size: 24px; align-self: flex-start; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-align: lower-left; display: flex; visibility: hidden;" />
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>

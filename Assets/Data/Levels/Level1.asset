@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   _waves:
-  - WaveDuration: 5
-    EnemyType: {fileID: 5435150163818605148, guid: 5960fe16ac66ebb40b8aa2515e85c258, type: 3}
+  - EnemyType: {fileID: 5435150163818605148, guid: 5960fe16ac66ebb40b8aa2515e85c258, type: 3}
+    EnemiesCount: 5
     EnemySpawnDelay: 2
     PauseAfterWave: 10
-  - WaveDuration: 10
-    EnemyType: {fileID: 5435150163818605148, guid: 01226a4a797b2d24286d3d9593622643, type: 3}
+  - EnemyType: {fileID: 5435150163818605148, guid: 01226a4a797b2d24286d3d9593622643, type: 3}
+    EnemiesCount: 7
     EnemySpawnDelay: 3
     PauseAfterWave: 15
-  - WaveDuration: 15
-    EnemyType: {fileID: 5435150163818605148, guid: e062d62e1e742e44fbad7f6206704a33, type: 3}
+  - EnemyType: {fileID: 5435150163818605148, guid: e062d62e1e742e44fbad7f6206704a33, type: 3}
+    EnemiesCount: 12
     EnemySpawnDelay: 1
     PauseAfterWave: 20
