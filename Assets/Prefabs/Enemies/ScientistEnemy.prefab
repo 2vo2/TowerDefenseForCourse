@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 7517430932137962066}
   - component: {fileID: 702447443492967383}
   m_Layer: 0
-  m_Name: Enemy2
+  m_Name: ScientistEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c4366a52cd1b3d469839938ecf9d126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyData: {fileID: 11400000, guid: 3a09b167927889b419d24c260b093d5f, type: 2}
+  _enemyData: {fileID: 11400000, guid: 4956aff778e74cd4e9adf70435a98ed1, type: 2}
   _pointToHit: {fileID: 1803411752357764686}
   _healthBarParent: {fileID: 2395554043602635987}
   _healthBar: {fileID: 6544687557732613761}

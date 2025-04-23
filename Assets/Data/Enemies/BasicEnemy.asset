@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ca547d6a451414d83654dabb1c83ba9, type: 3}
-  m_Name: BaseEnemy
+  m_Name: BasicEnemy
   m_EditorClassIdentifier: 
-  _health: 5
+  _health: 3
   _attackDelay: 2
-  _damage: 5
-  _speed: 2
-  _rewardForKill: 3
+  _damage: 3
+  _speed: 1.5
+  _rewardForKill: 2
