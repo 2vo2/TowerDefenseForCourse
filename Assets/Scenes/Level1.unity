@@ -1113,7 +1113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d3bd88eb04ccd4aaefc2b2b527f289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameInterface: {fileID: 178915656}
+  _gameUIDocument: {fileID: 178915656}
+  _gameInterface: {fileID: 9197481963319205126, guid: fa55ed654112a2e4fafd5fe55d6f2637, type: 3}
+  _winLoseScreen: {fileID: 9197481963319205126, guid: 3cbc4508896486849a1b167252210e9e, type: 3}
+  _playerBase: {fileID: 327015135}
   _enemyBase: {fileID: 1138185109}
 --- !u!1001 &204984498
 PrefabInstance:
@@ -2045,6 +2048,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2111032646245359838, guid: 4c8bac7d200c80a4085d3daddaa54a83, type: 3}
   m_PrefabInstance: {fileID: 307877342}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &327015135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4086053216630383557, guid: feaa3e946d03b5c468cd29cf5a988496, type: 3}
+  m_PrefabInstance: {fileID: 1910012066}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be9421f33cb3b540b53f6fb72eb1944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

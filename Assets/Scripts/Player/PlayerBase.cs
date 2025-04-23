@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class PlayerBase : MonoBehaviour
@@ -16,6 +17,8 @@ public class PlayerBase : MonoBehaviour
     private int _currentHealth;
     
     public Transform PlayerBasePoint => _playerBasePoint;
+    
+    public event UnityAction<string> Destroyed;
     
     private void Awake()
     {
@@ -40,6 +43,7 @@ public class PlayerBase : MonoBehaviour
         if (_currentHealth <= 0)
         {
             gameObject.SetActive(false);
+            Destroyed?.Invoke("LOSE!");
         }
     }
 }
