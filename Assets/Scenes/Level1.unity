@@ -1060,6 +1060,7 @@ GameObject:
   - component: {fileID: 178915657}
   - component: {fileID: 178915656}
   - component: {fileID: 178915658}
+  - component: {fileID: 178915659}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -1115,9 +1116,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameUIDocument: {fileID: 178915656}
   _gameInterface: {fileID: 9197481963319205126, guid: fa55ed654112a2e4fafd5fe55d6f2637, type: 3}
-  _winLoseScreen: {fileID: 9197481963319205126, guid: 3cbc4508896486849a1b167252210e9e, type: 3}
   _playerBase: {fileID: 327015135}
   _enemyBase: {fileID: 1138185109}
+--- !u!114 &178915659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178915655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c79ecbe116e479cb5161a453200c7eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameUIDocument: {fileID: 178915656}
+  _gameInterface: {fileID: 178915658}
+  _winLoseScreen: {fileID: 9197481963319205126, guid: 3cbc4508896486849a1b167252210e9e, type: 3}
 --- !u!1001 &204984498
 PrefabInstance:
   m_ObjectHideFlags: 0

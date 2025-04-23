@@ -7,7 +7,6 @@ public class GameInterface : MonoBehaviour
 {
     [SerializeField] private UIDocument _gameUIDocument;
     [SerializeField] private VisualTreeAsset _gameInterface;
-    [SerializeField] private VisualTreeAsset _winLoseScreen;
     [SerializeField] private PlayerBase _playerBase;
     [SerializeField] private EnemyBase _enemyBase;
 
