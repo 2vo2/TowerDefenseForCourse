@@ -5,7 +5,9 @@ using UnityEngine.UIElements;
 
 public class GameInterface : MonoBehaviour
 {
-    [SerializeField] private UIDocument _gameInterface;
+    [SerializeField] private UIDocument _gameUIDocument;
+    [SerializeField] private VisualTreeAsset _gameInterface;
+    [SerializeField] private VisualTreeAsset _winLoseScreen;
     [SerializeField] private EnemyBase _enemyBase;
 
     private VisualElement _root;
@@ -20,7 +22,8 @@ public class GameInterface : MonoBehaviour
 
     private void Awake()
     {
-        _root = _gameInterface.rootVisualElement;
+        _gameUIDocument.visualTreeAsset = _gameInterface; 
+        _root = _gameUIDocument.rootVisualElement;
 
         _moneyLabel = _root.Q<Label>("MoneyLabel");
         _waveLabel = _root.Q<Label>("WaveLabel");
@@ -79,5 +82,11 @@ public class GameInterface : MonoBehaviour
                 OnButtonClick?.Invoke(index - 1);
             }
         }
+    }
+
+    private void ShowWinLoseScreen()
+    {
+        _gameUIDocument.visualTreeAsset = _winLoseScreen;
+        _root = _gameUIDocument.rootVisualElement;
     }
 }
