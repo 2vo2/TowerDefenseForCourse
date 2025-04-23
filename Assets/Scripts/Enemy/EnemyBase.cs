@@ -18,6 +18,7 @@ public class EnemyBase : MonoBehaviour
     public event UnityAction<int, int> WaveActivated;
     public event UnityAction<int> EnemyLeft; 
     public event UnityAction<float, bool> PauseAfterWave;
+    public event UnityAction<string> WavesEnded;
 
     private void Start()
     {
@@ -117,6 +118,8 @@ public class EnemyBase : MonoBehaviour
                 PauseAfterWave?.Invoke(0f, false);
             }
         }
+        
+        WavesEnded?.Invoke("WIN!");
     }
 
     private EnemyUnit GetInactiveEnemy(int waveIndex)

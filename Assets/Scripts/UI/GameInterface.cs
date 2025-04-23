@@ -8,6 +8,7 @@ public class GameInterface : MonoBehaviour
     [SerializeField] private UIDocument _gameUIDocument;
     [SerializeField] private VisualTreeAsset _gameInterface;
     [SerializeField] private VisualTreeAsset _winLoseScreen;
+    [SerializeField] private PlayerBase _playerBase;
     [SerializeField] private EnemyBase _enemyBase;
 
     private VisualElement _root;
@@ -19,6 +20,7 @@ public class GameInterface : MonoBehaviour
     public Label MoneyLabel => _moneyLabel;
 
     public event UnityAction<int> OnButtonClick;
+    public event UnityAction<string> GameEnded;
 
     private void Awake()
     {
@@ -43,6 +45,8 @@ public class GameInterface : MonoBehaviour
         _enemyBase.WaveActivated += OnWaveActivated;
         _enemyBase.EnemyLeft += OnEnemyLeft;
         _enemyBase.PauseAfterWave += OnPauseAfterWave;
+        _enemyBase.WavesEnded += OnGameEnded;
+        _playerBase.Destroyed += OnGameEnded;
     }
 
     private void OnDisable()
@@ -50,6 +54,8 @@ public class GameInterface : MonoBehaviour
         _enemyBase.WaveActivated -= OnWaveActivated;
         _enemyBase.EnemyLeft -= OnEnemyLeft;
         _enemyBase.PauseAfterWave -= OnPauseAfterWave;
+        _enemyBase.WavesEnded -= OnGameEnded;
+        _playerBase.Destroyed -= OnGameEnded;
     }
 
     private void OnWaveActivated(int waveIndex, int waveCount)
@@ -84,9 +90,8 @@ public class GameInterface : MonoBehaviour
         }
     }
 
-    private void ShowWinLoseScreen()
+    private void OnGameEnded(string winningText)
     {
-        _gameUIDocument.visualTreeAsset = _winLoseScreen;
-        _root = _gameUIDocument.rootVisualElement;
+        GameEnded?.Invoke(winningText);
     }
 }
