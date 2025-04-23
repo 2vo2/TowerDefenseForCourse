@@ -18,10 +18,10 @@
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    border-left-color: rgb(0, 0, 0);
-    border-right-color: rgb(0, 0, 0);
-    border-top-color: rgb(0, 0, 0);
-    border-bottom-color: rgb(0, 0, 0);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
     border-top-width: 5px;
     border-right-width: 5px;
     border-bottom-width: 5px;
@@ -30,11 +30,9 @@
     margin-right: 20px;
     margin-bottom: 20px;
     margin-left: 20px;
-
     padding-top: 40px;
     padding-bottom: 40px;
 }
-
 
 .button:hover {
     background-color: rgb(56, 154, 105);
@@ -58,10 +56,10 @@
     align-items: center;
     height: 256px;
     background-color: rgb(76, 174, 125);
-    border-left-color: rgb(0, 0, 0);
-    border-right-color: rgb(0, 0, 0);
-    border-top-color: rgb(0, 0, 0);
-    border-bottom-color: rgb(0, 0, 0);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
     border-top-width: 5px;
     border-right-width: 5px;
     border-bottom-width: 5px;
@@ -88,7 +86,7 @@
     align-items: center;
 }
 
-.music-toggle:focus Label{
+.music-toggle:focus Label {
     color: rgb(255, 255, 200);
 }
 
