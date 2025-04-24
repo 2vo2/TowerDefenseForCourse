@@ -16,3 +16,4 @@ MonoBehaviour:
   _shootSpeed: 0.4
   _shootForce: 300
   _projectile: {fileID: 2631634825544250438, guid: 96178c27ed4705c49bb20079b047c676, type: 3}
+  _cost: 15

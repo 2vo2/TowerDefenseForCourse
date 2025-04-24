@@ -41,9 +41,12 @@ public class TowerPlacer : MonoBehaviour
 
     private void OnButtonClick(int index)
     {
-        if (_moneySystem.MoneyValue >= 10)
+        print($"Money Sytem Value: {_moneySystem.MoneyValue}");
+        print($"Tower Cost: {_towerPrefabs[index].TowerData.Cost}");
+        
+        if (_moneySystem.MoneyValue >= _towerPrefabs[index].TowerData.Cost)
         {
-            _moneySystem.DeductMoney(10);
+            _moneySystem.DeductMoney(_towerPrefabs[index].TowerData.Cost);
             
             _activeTower = Instantiate(_towerPrefabs[index], SpawnPosition(), Quaternion.identity);
             _towerSpawned = true;
