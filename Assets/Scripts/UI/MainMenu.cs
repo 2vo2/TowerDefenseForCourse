@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         ShowMainMenu();
+        GameAudio.Instance.PlayMusic(GameAudio.Instance.GameAudioData.Music);
     }
 
     private void ShowMainMenu()
@@ -24,9 +25,21 @@ public class MainMenu : MonoBehaviour
         var settingsButton = _root.Q<Button>("SettingsButton");
         var quitButton = _root.Q<Button>("QuitButton");
         
-        playButton.RegisterCallback<ClickEvent>(evt => SceneManager.LoadSceneAsync(1));
-        settingsButton.RegisterCallback<ClickEvent>(evt => ShowSettingsMenu());
-        quitButton.RegisterCallback<ClickEvent>(evt => Application.Quit());
+        playButton.RegisterCallback<ClickEvent>(evt =>
+        {
+            GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
+            SceneManager.LoadSceneAsync(1);
+        });
+        settingsButton.RegisterCallback<ClickEvent>(evt =>
+        {
+            GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
+            ShowSettingsMenu();
+        });
+        quitButton.RegisterCallback<ClickEvent>(evt =>
+        {
+            GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
+            Application.Quit();
+        });
     }
 
     private void ShowSettingsMenu()
@@ -38,8 +51,21 @@ public class MainMenu : MonoBehaviour
         var volumeSlider = _root.Q<Slider>("VolumeSlider");
         var backButton = _root.Q<Button>("BackButton");
         
-        musicToggle.RegisterValueChangedCallback(evt => Debug.Log("Toggle: " + evt.newValue));
-        volumeSlider.RegisterValueChangedCallback(evt => Debug.Log("Volume: " + evt.newValue));
-        backButton.RegisterCallback<ClickEvent>(evt => ShowMainMenu());
+        musicToggle.value = GameAudio.Instance.GetAudioToggle();
+        volumeSlider.value = GameAudio.Instance.GetAudioVolume();
+        
+        musicToggle.RegisterValueChangedCallback(evt =>
+        {
+            GameAudio.Instance.AudioToggle(evt.newValue);
+        });
+        volumeSlider.RegisterValueChangedCallback(evt =>
+        {
+            GameAudio.Instance.AudioVolumeChanged(evt.newValue);
+        });
+        backButton.RegisterCallback<ClickEvent>(evt =>
+        {
+            GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
+            ShowMainMenu();
+        });
     }
 }

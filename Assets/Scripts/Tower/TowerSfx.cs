@@ -18,6 +18,6 @@ public class TowerSfx : MonoBehaviour
 
     private void OnTowerShoted(AudioClip clip)
     {
-        GameAudio.Instance.GameSfx.PlaySfx(clip);
+        GameAudio.Instance.PlaySfx(clip);
     }
 }
