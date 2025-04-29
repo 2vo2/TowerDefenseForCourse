@@ -12,7 +12,8 @@ public class MainMenu : MonoBehaviour
     private Button _playButton;
     private Button _settingsButton;
     private Button _quitButton;
-    private Toggle _audioToggle;
+    private Toggle _musicToggle;
+    private Toggle _sfxToggle;
     private Slider _musicSlider;
     private Slider _sfxSlider;
     private Button _backButton;
@@ -22,6 +23,7 @@ public class MainMenu : MonoBehaviour
         ShowMainMenu();
         
         GameAudio.Instance.PlayMusic(GameAudio.Instance.GameAudioData.Music);
+        GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
     }
 
     private void ShowMainMenu()
@@ -55,19 +57,25 @@ public class MainMenu : MonoBehaviour
         _menuUIDocument.visualTreeAsset = _settingsMenu;
         _root = _menuUIDocument.rootVisualElement;
         
-        _audioToggle = _root.Q<Toggle>("MusicToggle");
+        _musicToggle = _root.Q<Toggle>("MusicToggle");
+        _sfxToggle = _root.Q<Toggle>("SfxToggle");
         _musicSlider = _root.Q<Slider>("VolumeSlider");
         _sfxSlider = _root.Q<Slider>("SfxSlider");
         _backButton = _root.Q<Button>("BackButton");
         
-        _audioToggle.value = GameAudio.Instance.GetAudioToggle();
+        _musicToggle.value = GameAudio.Instance.GetAudioToggle("MusicToggle");
+        _sfxToggle.value = GameAudio.Instance.GetAudioToggle("SfxToggle");
         
         _musicSlider.value = GameAudio.Instance.GetAudioVolume("MusicVolume");
         _sfxSlider.value = GameAudio.Instance.GetAudioVolume("SfxVolume");
         
-        _audioToggle.RegisterValueChangedCallback(evt =>
+        _musicToggle.RegisterValueChangedCallback(evt =>
         {
-            GameAudio.Instance.AudioToggle("MusicToggle", evt.newValue);
+            GameAudio.Instance.SetMusicToggle(evt.newValue);
+        });
+        _sfxToggle.RegisterValueChangedCallback(evt =>
+        {
+            GameAudio.Instance.SetSfxToggle(evt.newValue);
         });
         _musicSlider.RegisterValueChangedCallback(evt =>
         {
