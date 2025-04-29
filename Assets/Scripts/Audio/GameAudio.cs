@@ -36,12 +36,19 @@ public class GameAudio : MonoBehaviour
         _musicAudioSource.clip = clip;
         _musicAudioSource.playOnAwake = true;
         _musicAudioSource.loop = true;
+        
+        _musicAudioSource.mute = !GetAudioToggle();
+        _musicAudioSource.volume = GetAudioVolume();
+        
         _musicAudioSource.Play();
     }
     
     public void PlaySfx(AudioClip clip)
     {
         _sfxAudioSource.PlayOneShot(clip);
+        
+        _sfxAudioSource.mute = GetAudioToggle();
+        _sfxAudioSource.volume = GetAudioVolume();
     }
     
     public void AudioToggle(bool toggleValue)

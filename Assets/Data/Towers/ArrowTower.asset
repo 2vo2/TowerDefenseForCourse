@@ -17,3 +17,4 @@ MonoBehaviour:
   _shootForce: 300
   _projectile: {fileID: 2631634825544250438, guid: 96178c27ed4705c49bb20079b047c676, type: 3}
   _shootSfx: {fileID: 8300000, guid: 701c1a454c409e24d9a246a1cf321689, type: 3}
+  _placeSfx: {fileID: 8300000, guid: c1994340e63f16e4abdcfd3d8c88d1ed, type: 3}
