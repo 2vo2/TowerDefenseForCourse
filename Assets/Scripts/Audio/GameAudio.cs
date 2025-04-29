@@ -18,9 +18,6 @@ public class GameAudio : MonoBehaviour
         else if (Instance != null)
             Destroy(gameObject);
         
-        SaveAudioToggle(1);
-        SaveAudioVolume(1f);
-        
         DontDestroyOnLoad(gameObject);
     }
 
