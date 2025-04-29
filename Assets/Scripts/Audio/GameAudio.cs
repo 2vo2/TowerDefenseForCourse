@@ -21,14 +21,14 @@ public class GameAudio : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void SaveAudioToggle(int toggle)
+    private void SaveAudioToggle(string playerPrefsKey, int toggle)
     {
-        PlayerPrefs.SetInt("AudioToggle", toggle);
+        PlayerPrefs.SetInt(playerPrefsKey, toggle);
     }
 
-    private void SaveAudioVolume(float volume)
+    private void SaveAudioVolume(string playerPrefsKey, float volume)
     {
-        PlayerPrefs.SetFloat("AudioVolume", volume);
+        PlayerPrefs.SetFloat(playerPrefsKey, volume);
     }
 
     public void PlayMusic(AudioClip clip)
@@ -38,42 +38,50 @@ public class GameAudio : MonoBehaviour
         _musicAudioSource.loop = true;
         
         _musicAudioSource.mute = !GetAudioToggle();
-        _musicAudioSource.volume = GetAudioVolume();
+        _musicAudioSource.volume = GetAudioVolume("MusicVolume");
         
         _musicAudioSource.Play();
     }
     
     public void PlaySfx(AudioClip clip)
     {
-        _sfxAudioSource.PlayOneShot(clip);
+        _sfxAudioSource.clip = clip;
         
-        _sfxAudioSource.mute = GetAudioToggle();
-        _sfxAudioSource.volume = GetAudioVolume();
+        _sfxAudioSource.mute = !GetAudioToggle();
+        _sfxAudioSource.volume = GetAudioVolume("SfxVolume");
+        
+        _sfxAudioSource.Play();
     }
     
-    public void AudioToggle(bool toggleValue)
+    public void AudioToggle(string playerPrefsKey, bool toggleValue)
     {
         _musicAudioSource.mute = !toggleValue;
         _sfxAudioSource.mute = !toggleValue;
-        
-        SaveAudioToggle(!toggleValue ? 0 : 1);
+
+        SaveAudioToggle(playerPrefsKey, toggleValue ? 0 : 1);
     }
 
-    public void AudioVolumeChanged(float value)
+    public void SetMusicVolume(float value)
     {
         _musicAudioSource.volume = value;
-        _sfxAudioSource.volume = value;
-        
-        SaveAudioVolume(value);
+
+        SaveAudioVolume("MusicVolume", value);
     }
 
+    public void SetSfxVolume(float value)
+    {
+        _sfxAudioSource.volume = value;
+
+        SaveAudioVolume("SfxVolume", value);
+    }
+    
     public bool GetAudioToggle()
     {
-        return PlayerPrefs.GetInt("AudioToggle", 1) == 1;
+        return PlayerPrefs.GetInt("MusicToggle", 1) == 0;
     }
 
-    public float GetAudioVolume()
+    public float GetAudioVolume(string playerPrefsKey)
     {
-        return PlayerPrefs.GetFloat("AudioVolume", 1f);
+        return PlayerPrefs.GetFloat(playerPrefsKey, 1f);
     }
 }

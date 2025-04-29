@@ -3,8 +3,9 @@
     <engine:VisualElement name="Settings" class="settings">
         <engine:VisualElement name="Music" class="music-panel">
             <engine:Label text="Music" class="music-label" />
-            <engine:Toggle label="Turn On/Off" value="true" name="MusicToggle" toggle-on-label-click="true" class="music-toggle" />
-            <engine:Slider label="Volume" value="0.5" high-value="1" name="VolumeSlider" class="volume-slider" />
+            <engine:Toggle label="Enable" value="true" name="MusicToggle" toggle-on-label-click="true" class="music-toggle" />
+            <engine:Slider label="Music" value="0.5" high-value="1" name="VolumeSlider" class="volume-slider" />
+            <engine:Slider label="SFX" value="0.5" high-value="1" name="SfxSlider" class="volume-slider" />
         </engine:VisualElement>
         <engine:VisualElement name="Button" class="button-wrapper">
             <engine:Button text="Back" name="BackButton" class="button" />

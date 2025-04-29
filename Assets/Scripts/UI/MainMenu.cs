@@ -9,10 +9,18 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private VisualTreeAsset _settingsMenu;
 
     private VisualElement _root;
+    private Button _playButton;
+    private Button _settingsButton;
+    private Button _quitButton;
+    private Toggle _audioToggle;
+    private Slider _musicSlider;
+    private Slider _sfxSlider;
+    private Button _backButton;
 
     private void Awake()
     {
         ShowMainMenu();
+        
         GameAudio.Instance.PlayMusic(GameAudio.Instance.GameAudioData.Music);
     }
 
@@ -21,21 +29,21 @@ public class MainMenu : MonoBehaviour
         _menuUIDocument.visualTreeAsset = _mainMenu;
         _root = _menuUIDocument.rootVisualElement;
 
-        var playButton = _root.Q<Button>("PlayButton");
-        var settingsButton = _root.Q<Button>("SettingsButton");
-        var quitButton = _root.Q<Button>("QuitButton");
+        _playButton = _root.Q<Button>("PlayButton");
+        _settingsButton = _root.Q<Button>("SettingsButton");
+        _quitButton = _root.Q<Button>("QuitButton");
         
-        playButton.RegisterCallback<ClickEvent>(evt =>
+        _playButton.RegisterCallback<ClickEvent>(evt =>
         {
             GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
             SceneManager.LoadSceneAsync(1);
         });
-        settingsButton.RegisterCallback<ClickEvent>(evt =>
+        _settingsButton.RegisterCallback<ClickEvent>(evt =>
         {
             GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
             ShowSettingsMenu();
         });
-        quitButton.RegisterCallback<ClickEvent>(evt =>
+        _quitButton.RegisterCallback<ClickEvent>(evt =>
         {
             GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
             Application.Quit();
@@ -47,22 +55,31 @@ public class MainMenu : MonoBehaviour
         _menuUIDocument.visualTreeAsset = _settingsMenu;
         _root = _menuUIDocument.rootVisualElement;
         
-        var musicToggle = _root.Q<Toggle>("MusicToggle");
-        var volumeSlider = _root.Q<Slider>("VolumeSlider");
-        var backButton = _root.Q<Button>("BackButton");
+        _audioToggle = _root.Q<Toggle>("MusicToggle");
+        _musicSlider = _root.Q<Slider>("VolumeSlider");
+        _sfxSlider = _root.Q<Slider>("SfxSlider");
+        _backButton = _root.Q<Button>("BackButton");
         
-        musicToggle.value = GameAudio.Instance.GetAudioToggle();
-        volumeSlider.value = GameAudio.Instance.GetAudioVolume();
+        _audioToggle.value = GameAudio.Instance.GetAudioToggle();
         
-        musicToggle.RegisterValueChangedCallback(evt =>
+        _musicSlider.value = GameAudio.Instance.GetAudioVolume("MusicVolume");
+        _sfxSlider.value = GameAudio.Instance.GetAudioVolume("SfxVolume");
+        
+        _audioToggle.RegisterValueChangedCallback(evt =>
         {
-            GameAudio.Instance.AudioToggle(evt.newValue);
+            GameAudio.Instance.AudioToggle("MusicToggle", evt.newValue);
         });
-        volumeSlider.RegisterValueChangedCallback(evt =>
+        _musicSlider.RegisterValueChangedCallback(evt =>
         {
-            GameAudio.Instance.AudioVolumeChanged(evt.newValue);
+            GameAudio.Instance.SetMusicVolume(evt.newValue);
         });
-        backButton.RegisterCallback<ClickEvent>(evt =>
+        _sfxSlider.RegisterValueChangedCallback(evt =>
+        {
+            GameAudio.Instance.SetSfxVolume(evt.newValue);
+            
+            GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
+        });
+        _backButton.RegisterCallback<ClickEvent>(evt =>
         {
             GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
             ShowMainMenu();
