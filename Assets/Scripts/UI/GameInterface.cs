@@ -75,6 +75,8 @@ public class GameInterface : MonoBehaviour
     
     private void OnTowerButtonClick(ClickEvent evt)
     {
+        GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
+        
         var button = evt.target as Button;
         if (button == null) return;
 

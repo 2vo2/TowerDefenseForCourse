@@ -15,6 +15,8 @@ public class TowerPlacer : MonoBehaviour
     private bool _isTowerPlaced;
 
     public bool IsTowerPlaced => _isTowerPlaced;
+    
+    public event UnityAction OnTowerPlaced;
 
     private void Awake()
     {
@@ -70,6 +72,7 @@ public class TowerPlacer : MonoBehaviour
                     _activeTower = null;
                     _towerSpawned = false;
                     _isTowerPlaced = true;
+                    OnTowerPlaced?.Invoke();
                     tile.Booked();
                 }
             }
