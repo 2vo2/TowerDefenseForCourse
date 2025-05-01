@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class TowerPlacer : MonoBehaviour
 {
     public static TowerPlacer Instance;
     
-    [SerializeField] private GameInterface _gameInterface;
+    [FormerlySerializedAs("_gameInterface")] [SerializeField] private GameScreen _gameScreen;
     [SerializeField] private MoneySystem _moneySystem;
     [SerializeField] private List<Tower> _towerPrefabs;
 
@@ -15,6 +16,8 @@ public class TowerPlacer : MonoBehaviour
     private bool _isTowerPlaced;
 
     public bool IsTowerPlaced => _isTowerPlaced;
+    
+    public event UnityAction OnTowerPlaced;
 
     private void Awake()
     {
@@ -26,7 +29,7 @@ public class TowerPlacer : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameInterface.OnButtonClick += OnButtonClick;
+        _gameScreen.OnButtonClick += OnButtonClick;
     }
 
     private void Update()
@@ -36,7 +39,7 @@ public class TowerPlacer : MonoBehaviour
 
     private void OnDisable()
     {
-        _gameInterface.OnButtonClick -= OnButtonClick;
+        _gameScreen.OnButtonClick -= OnButtonClick;
     }
 
     private void OnButtonClick(int index)
@@ -73,6 +76,7 @@ public class TowerPlacer : MonoBehaviour
                     _activeTower = null;
                     _towerSpawned = false;
                     _isTowerPlaced = true;
+                    OnTowerPlaced?.Invoke();
                     tile.Booked();
                 }
             }

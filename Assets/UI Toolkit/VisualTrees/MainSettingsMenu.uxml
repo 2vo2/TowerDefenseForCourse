@@ -1,0 +1,21 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=7caa85a958134da4b957e7c0ef9d2ca7&amp;type=3#MainMenuStyle" />
+    <engine:VisualElement name="Settings" class="settings">
+        <engine:VisualElement name="Music" class="music-panel" style="justify-content: center; align-content: flex-start;">
+            <engine:Label text="Music" class="music-label" style="margin-bottom: 4px;" />
+            <engine:VisualElement style="flex-grow: 1; align-self: auto;">
+                <engine:Label text="Audio" class="music-label" style="font-size: 24px; margin-bottom: 4px; align-self: center;" />
+                <engine:Toggle label="Music" value="true" name="MusicToggle" toggle-on-label-click="true" class="music-toggle" />
+                <engine:Toggle label="SFX" value="true" name="SfxToggle" toggle-on-label-click="true" class="music-toggle" />
+            </engine:VisualElement>
+            <engine:VisualElement style="flex-grow: 1;">
+                <engine:Label text="Volume" class="music-label" style="font-size: 24px; margin-bottom: 4px; align-self: center;" />
+                <engine:Slider label="Music" value="0.5" high-value="1" name="VolumeSlider" direction="Horizontal" class="volume-slider" style="margin-right: 20px;" />
+                <engine:Slider label="SFX" value="0.5" high-value="1" name="SfxSlider" class="volume-slider" style="margin-right: 20px;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="Button" class="button-wrapper">
+            <engine:Button text="Back" name="BackButton" class="button" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

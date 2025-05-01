@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class Tower : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class Tower : MonoBehaviour
     private float _attackTimer;
     
     public TowerScriptableObject TowerData => _towerData;
+    
+    public event UnityAction TowerShoted;
     
     private void Awake()
     {
@@ -49,6 +52,7 @@ public class Tower : MonoBehaviour
         if (_attackTimer >= _shootSpeed && _currentEnemyUnit)
         {
             Shoot();
+            TowerShoted?.Invoke();
             _attackTimer = 0;
 
             if (!_enemyDetector.IsEnemyInRange(transform.position, _currentEnemyUnit, _shootRadius))
