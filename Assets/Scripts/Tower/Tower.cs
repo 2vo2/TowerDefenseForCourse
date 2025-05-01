@@ -13,6 +13,7 @@ public class Tower : MonoBehaviour
     private float _shootSpeed;
     private float _shootForce;
     private Projectile _projectile;
+    private int _cost;
     
     private EnemyUnit _currentEnemyUnit;
     private float _attackTimer;
@@ -27,6 +28,7 @@ public class Tower : MonoBehaviour
         _shootSpeed = _towerData.ShootSpeed;
         _shootForce = _towerData.ShootForce;
         _projectile = _towerData.Projectile;
+        _cost = _towerData.Cost;
 
         _enemyDetector = new EnemyDetector();
         _towerShooter = new TowerShooter();

@@ -15,6 +15,7 @@ MonoBehaviour:
   _shootRadius: 2
   _shootSpeed: 1
   _shootForce: 300
+  _cost: 10
   _projectile: {fileID: 2631634825544250438, guid: 55f1ee2329ed7bc43be06de7403e24e4, type: 3}
   _shootSfx: {fileID: 8300000, guid: 57fd27bb44ab6d54186a5c9c51de8b93, type: 3}
   _placeSfx: {fileID: 8300000, guid: c1994340e63f16e4abdcfd3d8c88d1ed, type: 3}
