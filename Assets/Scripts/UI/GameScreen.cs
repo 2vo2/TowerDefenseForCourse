@@ -19,7 +19,6 @@ public class GameScreen : UIScreen
     public Label MoneyLabel => _moneyLabel;
 
     public event UnityAction<int> OnButtonClick;
-    public event UnityAction<string> GameEnded;
 
     private void Awake()
     {
@@ -113,6 +112,6 @@ public class GameScreen : UIScreen
 
     private void OnGameEnded(string winningText)
     {
-        _winLoseScreen.ShowMenu();
+        _winLoseScreen.ShowWinLoseScreen(winningText);
     }
 }

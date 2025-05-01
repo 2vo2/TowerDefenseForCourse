@@ -12,20 +12,10 @@ public class WinLoseScreen : UIScreen
     private Button _menuButton;
     private Button _playButton;
     private Button _restartButton;
-    
-    private void OnEnable()
-    {
-        _gameScreen.GameEnded += ShowWinLoseScreen;
-    }
 
-    private void OnDisable()
+    public void ShowWinLoseScreen(string winningText)
     {
-        _gameScreen.GameEnded -= ShowWinLoseScreen;
-    }
-
-    private void ShowWinLoseScreen(string winningText)
-    {
-        Initialize();
+        ShowMenu();
         
         _winningLabel.text = $"YOU {winningText}";
     }
@@ -34,7 +24,7 @@ public class WinLoseScreen : UIScreen
     {
         SceneManager.LoadSceneAsync(sceneNumber);
     }
-
+    
     public override void Initialize()
     {
         _winningLabel = _root.Q<Label>("WinningLabel");

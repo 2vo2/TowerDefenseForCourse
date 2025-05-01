@@ -42,8 +42,8 @@ public class PlayerBase : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            gameObject.SetActive(false);
             Destroyed?.Invoke("LOSE!");
+            gameObject.SetActive(false);
         }
     }
 }

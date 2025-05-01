@@ -7,7 +7,7 @@ public class TowerPlacer : MonoBehaviour
 {
     public static TowerPlacer Instance;
     
-    [FormerlySerializedAs("_gameInterface")] [SerializeField] private GameScreen _gameScreen;
+    [SerializeField] private GameScreen _gameScreen;
     [SerializeField] private MoneySystem _moneySystem;
     [SerializeField] private List<Tower> _towerPrefabs;
 
@@ -44,9 +44,6 @@ public class TowerPlacer : MonoBehaviour
 
     private void OnButtonClick(int index)
     {
-        print($"Money Sytem Value: {_moneySystem.MoneyValue}");
-        print($"Tower Cost: {_towerPrefabs[index].TowerData.Cost}");
-        
         if (_moneySystem.MoneyValue >= _towerPrefabs[index].TowerData.Cost)
         {
             _moneySystem.DeductMoney(_towerPrefabs[index].TowerData.Cost);
