@@ -1061,6 +1061,7 @@ GameObject:
   - component: {fileID: 178915656}
   - component: {fileID: 178915658}
   - component: {fileID: 178915659}
+  - component: {fileID: 178915660}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -1114,10 +1115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d3bd88eb04ccd4aaefc2b2b527f289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameUIDocument: {fileID: 178915656}
-  _gameInterface: {fileID: 9197481963319205126, guid: fa55ed654112a2e4fafd5fe55d6f2637, type: 3}
+  _menuUIDocument: {fileID: 178915656}
+  _menuVisualTreeAsset: {fileID: 9197481963319205126, guid: fa55ed654112a2e4fafd5fe55d6f2637, type: 3}
   _playerBase: {fileID: 327015135}
   _enemyBase: {fileID: 1138185109}
+  _winLoseScreen: {fileID: 178915659}
+  _settingsScreen: {fileID: 178915660}
 --- !u!114 &178915659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1130,9 +1133,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c79ecbe116e479cb5161a453200c7eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameUIDocument: {fileID: 178915656}
-  _gameInterface: {fileID: 178915658}
-  _winLoseScreen: {fileID: 9197481963319205126, guid: 3cbc4508896486849a1b167252210e9e, type: 3}
+  _menuUIDocument: {fileID: 178915656}
+  _menuVisualTreeAsset: {fileID: 9197481963319205126, guid: 3cbc4508896486849a1b167252210e9e, type: 3}
+  _gameScreen: {fileID: 178915658}
+--- !u!114 &178915660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178915655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1f39921d5d470fbad4b6322d0d9384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _menuUIDocument: {fileID: 178915656}
+  _menuVisualTreeAsset: {fileID: 9197481963319205126, guid: c62f1df69fa20fe48943eb22dcbc2d88, type: 3}
+  _mainMenuScreen: {fileID: 178915658}
 --- !u!1001 &204984498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2225,7 +2243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a89ff9fedd2f40c8abee0edb4c6fb425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameInterface: {fileID: 178915658}
+  _gameScreen: {fileID: 178915658}
   _moneySystem: {fileID: 330585549}
   _towerPrefabs:
   - {fileID: 3292911561796495234, guid: 77ad9b7cd274ff0439f96dcf52a0b1a6, type: 3}

@@ -560,6 +560,7 @@ GameObject:
   - component: {fileID: 803686291}
   - component: {fileID: 803686290}
   - component: {fileID: 803686292}
+  - component: {fileID: 803686293}
   m_Layer: 5
   m_Name: MenuUI
   m_TagString: Untagged
@@ -614,8 +615,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuUIDocument: {fileID: 803686290}
-  _mainMenu: {fileID: 9197481963319205126, guid: 69e5c10db414efd42bcfaf624273fffa, type: 3}
-  _settingsMenu: {fileID: 9197481963319205126, guid: f4a7013ff39b3ad43b69a47fcc6e82db, type: 3}
+  _menuVisualTreeAsset: {fileID: 9197481963319205126, guid: 69e5c10db414efd42bcfaf624273fffa, type: 3}
+  _settingsScreen: {fileID: 803686293}
+--- !u!114 &803686293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803686289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 862bbaae4dd24bebab316f542bb98013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _menuUIDocument: {fileID: 803686290}
+  _menuVisualTreeAsset: {fileID: 9197481963319205126, guid: f4a7013ff39b3ad43b69a47fcc6e82db, type: 3}
+  _mainMenuScreen: {fileID: 803686292}
 --- !u!1001 &804760117
 PrefabInstance:
   m_ObjectHideFlags: 0

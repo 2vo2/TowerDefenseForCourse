@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class MoneySystem : MonoBehaviour
 {
-    [SerializeField] private GameInterface _gameUI;
+    [SerializeField] private GameScreen _gameUI;
     [SerializeField] private EnemyBase _enemyBase;
     [SerializeField] private float _delay;
 

@@ -1,0 +1,24 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=7caa85a958134da4b957e7c0ef9d2ca7&amp;type=3#MainMenuStyle" />
+    <engine:VisualElement name="Settings" class="settings">
+        <engine:VisualElement name="Music" class="music-panel" style="justify-content: center; align-content: flex-start; margin-bottom: 20px;">
+            <engine:Label text="Settings" class="music-label" style="margin-bottom: 4px;" />
+            <engine:VisualElement style="flex-grow: 1; align-self: auto;">
+                <engine:Label text="Audio" class="music-label" style="font-size: 24px; margin-bottom: 4px; align-self: center;" />
+                <engine:Toggle label="Music" value="true" name="MusicToggle" toggle-on-label-click="true" class="music-toggle" />
+                <engine:Toggle label="SFX" value="true" name="SfxToggle" toggle-on-label-click="true" class="music-toggle" />
+            </engine:VisualElement>
+            <engine:VisualElement style="flex-grow: 1;">
+                <engine:Label text="Volume" class="music-label" style="font-size: 24px; margin-bottom: 4px; align-self: center;" />
+                <engine:Slider label="Music" value="0.5" high-value="1" name="VolumeSlider" direction="Horizontal" class="volume-slider" style="margin-right: 20px;" />
+                <engine:Slider label="SFX" value="0.5" high-value="1" name="SfxSlider" class="volume-slider" style="margin-right: 20px;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="ButtonContainer" class="button-wrapper" style="flex-direction: row; align-items: stretch; justify-content: center;">
+            <engine:Button name="QuitButton" class="button" style="background-image: url(&quot;project://database/Assets/Sprites/Icons/quit.png?fileID=2800000&amp;guid=9cee9d75b3bdb744697cc64ceaeed41e&amp;type=3#quit&quot;); background-color: rgb(76, 174, 125); background-size: 50% 50%; width: 6%; margin-right: 10px;" />
+            <engine:Button text="Back" name="BackButton" class="button" style="margin-left: 10px; margin-right: 10px;" />
+            <engine:Button name="RestartButton" class="button" style="background-image: url(&quot;project://database/Assets/Sprites/Icons/restart.png?fileID=2800000&amp;guid=614c58b9c8e7998459e13abdf9f864e5&amp;type=3#restart&quot;); background-color: rgb(76, 174, 125); background-size: 50% 50%; width: 6%; margin-left: 10px;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="ButtonContainer" style="flex-grow: 1; margin-top: 0; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 0; margin-right: 100px; margin-left: 100px; align-self: stretch;" />
+    </engine:VisualElement>
+</engine:UXML>

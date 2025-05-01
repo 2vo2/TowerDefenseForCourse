@@ -1,16 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
-public class GameInterface : MonoBehaviour
+public class GameScreen : UIScreen
 {
-    [SerializeField] private UIDocument _gameUIDocument;
-    [SerializeField] private VisualTreeAsset _gameInterface;
     [SerializeField] private PlayerBase _playerBase;
     [SerializeField] private EnemyBase _enemyBase;
-
-    private VisualElement _root;
+    [SerializeField] private WinLoseScreen _winLoseScreen;
+    [SerializeField] private LevelSettingsScreen _settingsScreen;
+    
     private Label _moneyLabel;
     private Label _waveLabel;
     private Label _enemiesCountLabel;
@@ -23,20 +23,58 @@ public class GameInterface : MonoBehaviour
 
     private void Awake()
     {
-        _gameUIDocument.visualTreeAsset = _gameInterface; 
-        _root = _gameUIDocument.rootVisualElement;
+        Initialize();
+    }
+
+    public override void Initialize()
+    {
+        _menuUIDocument.visualTreeAsset = _menuVisualTreeAsset; 
+        _root = _menuUIDocument.rootVisualElement;
 
         _moneyLabel = _root.Q<Label>("MoneyLabel");
         _waveLabel = _root.Q<Label>("WaveLabel");
         _enemiesCountLabel = _root.Q<Label>("EnemiesCountLabel");
         _pauseAfterWaveLabel = _root.Q<Label>("PauseAfterWaveLabel");
         
-        var buttons = _root.Query<Button>().Class("unity-button").Build();
+        var buttons = _root.Query<Button>().Class("tower-button").Build();
 
         buttons.ForEach(button =>
         {
             button.RegisterCallback<ClickEvent>(OnTowerButtonClick);
         });
+        
+        var settingsButton = _root.Q<Button>("SettingsButton");
+
+        settingsButton.RegisterCallback<ClickEvent>(OnSettingsButtonClick);
+    }
+
+    private void OnTowerButtonClick(ClickEvent evt)
+    {
+        PlayButtonSfx();
+        
+        var button = evt.target as Button;
+        if (button == null) return;
+
+        var name = button.name;
+        if (name.StartsWith("TowerButton-"))
+        {
+            var indexStr = name.Replace("TowerButton-", "");
+            if (int.TryParse(indexStr, out var index))
+            {
+                OnButtonClick?.Invoke(index - 1);
+            }
+        }
+    }
+
+    private void PlayButtonSfx()
+    {
+        GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
+    }
+
+    private void OnSettingsButtonClick(ClickEvent evt)
+    {
+        _settingsScreen.ShowMenu();
+        _settingsScreen.SettingsInitialize();
     }
 
     private void OnEnable()
@@ -72,27 +110,9 @@ public class GameInterface : MonoBehaviour
         _pauseAfterWaveLabel.visible = pause;
         _pauseAfterWaveLabel.text = $"Pause: {pauseDuration:F0}";
     }
-    
-    private void OnTowerButtonClick(ClickEvent evt)
-    {
-        GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
-        
-        var button = evt.target as Button;
-        if (button == null) return;
-
-        var name = button.name;
-        if (name.StartsWith("TowerButton-"))
-        {
-            var indexStr = name.Replace("TowerButton-", "");
-            if (int.TryParse(indexStr, out var index))
-            {
-                OnButtonClick?.Invoke(index - 1);
-            }
-        }
-    }
 
     private void OnGameEnded(string winningText)
     {
-        GameEnded?.Invoke(winningText);
+        _winLoseScreen.ShowMenu();
     }
 }
