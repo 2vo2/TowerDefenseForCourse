@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class TileGridGenerator : EditorWindow
 {
@@ -11,6 +12,8 @@ public class TileGridGenerator : EditorWindow
     [SerializeField] private Road _roadPrefab;
     [SerializeField] private PlayerBase _playerBase;
     [SerializeField] private EnemyBase _enemyBase;
+    [SerializeField] private List<EnvironmentTile> _environmentTilesTrees;
+    [SerializeField] private List<EnvironmentTile> _environmentTilesDetails;
     
     [MenuItem("Tools/Tile Grid Generator")]
     public static void ShowWindow()
@@ -27,6 +30,16 @@ public class TileGridGenerator : EditorWindow
         _playerBase = (PlayerBase)EditorGUILayout.ObjectField("Player Base", _playerBase, typeof(PlayerBase), false);
         _enemyBase = (EnemyBase)EditorGUILayout.ObjectField("Enemy Base", _enemyBase, typeof(EnemyBase), false);
 
+        SerializedObject soTrees = new SerializedObject(this);
+        SerializedProperty tilesPropTrees = soTrees.FindProperty("_environmentTilesTrees");
+        EditorGUILayout.PropertyField(tilesPropTrees, true);
+        soTrees.ApplyModifiedProperties();
+        
+        SerializedObject soDetails = new SerializedObject(this);
+        SerializedProperty tilesPropDetails = soDetails.FindProperty("_environmentTilesDetails");
+        EditorGUILayout.PropertyField(tilesPropDetails, true);
+        soDetails.ApplyModifiedProperties();
+        
         if (GUILayout.Button("Generate Grid"))
         {
             PlaceTiles();
@@ -103,7 +116,7 @@ public class TileGridGenerator : EditorWindow
         // Спочатку до передфінішу (по X), не на SizeX
         Vector3 preFinish = new Vector3(_sizeX - 1, 0, finishZ);
         ConnectPoints(rightRandomPos, preFinish, parent);
-
+        
         FillRemainingWithTiles(parent);
         Debug.Log("Tiles placed successfully!");
     }
@@ -135,26 +148,71 @@ public class TileGridGenerator : EditorWindow
 
     private void FillRemainingWithTiles(GameObject parent)
     {
-        HashSet<Vector2Int> occupied = new HashSet<Vector2Int>();
-        foreach (Transform child in parent.transform)
+        if (_tilePrefab == null || _environmentTilesTrees == null)
         {
-            Vector3 pos = child.position;
-            Vector2Int gridPos = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z));
-            occupied.Add(gridPos);
+            Debug.LogError("Assign both Tile and EnvironmentTile prefabs!");
+            return;
         }
 
+        HashSet<Vector2Int> roadPositions = new HashSet<Vector2Int>();
+        foreach (Transform child in parent.transform)
+        {
+            if (child.GetComponent<Road>() != null)
+            {
+                Vector3 pos = child.position;
+                roadPositions.Add(new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z)));
+            }
+        }
+
+        // Створюємо набір TileToPlace навколо дороги
+        HashSet<Vector2Int> tilePositions = new HashSet<Vector2Int>();
+        int radius = 1;
+        foreach (var road in roadPositions)
+        {
+            for (int dx = -radius; dx <= radius; dx++)
+            {
+                for (int dz = -radius; dz <= radius; dz++)
+                {
+                    Vector2Int pos = new Vector2Int(road.x + dx, road.y + dz);
+                    tilePositions.Add(pos);
+                }
+            }
+        }
+
+        // Створення тайлів
         for (int x = -_sizeX; x <= _sizeX; x++)
         {
             for (int z = -_sizeZ; z <= _sizeZ; z++)
             {
                 Vector2Int pos = new Vector2Int(x, z);
-                if (occupied.Contains(pos)) continue;
+                if (roadPositions.Contains(pos)) continue;
 
-                var tile = (TileToPlace)PrefabUtility.InstantiatePrefab(_tilePrefab);
-                tile.name = $"Tile_{x}_{z}";
-                tile.transform.position = new Vector3(x, 0, z);
-                tile.transform.parent = parent.transform;
+                Tile tileObj;
+                if (tilePositions.Contains(pos))
+                {
+                    tileObj = (TileToPlace)PrefabUtility.InstantiatePrefab(_tilePrefab);
+                    tileObj.name = $"Tile_{x}_{z}";
+                }
+                else
+                {
+                    if (Random.Range(0, 10) < 8)
+                    {
+                        tileObj = (EnvironmentTile)PrefabUtility.
+                            InstantiatePrefab(_environmentTilesTrees[Random.Range(0, _environmentTilesTrees.Count)]);
+                        tileObj.name = $"EnvTile_{x}_{z}";
+                    }
+                    else
+                    {
+                        tileObj = (EnvironmentTile)PrefabUtility.
+                            InstantiatePrefab(_environmentTilesDetails[Random.Range(0, _environmentTilesDetails.Count)]);
+                        tileObj.name = $"EnvTile_{x}_{z}";
+                    }
+                }
+
+                tileObj.transform.position = new Vector3(x, 0, z);
+                tileObj.transform.parent = parent.transform;
             }
         }
     }
+
 }
