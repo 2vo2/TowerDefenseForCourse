@@ -74,6 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7584131621778786135}
   - component: {fileID: 3292911561796495234}
+  - component: {fileID: 882051795599216129}
   - component: {fileID: 7668275329102627374}
   - component: {fileID: 1357871866916281178}
   m_Layer: 0
@@ -114,6 +115,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _towerData: {fileID: 11400000, guid: a945abc481dcb8942b3beb9d284c5a85, type: 2}
   _projectileSpawnPoint: {fileID: 836566187017042469}
+  _towerShooter: {fileID: 882051795599216129}
+--- !u!114 &882051795599216129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8252716179801325711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 080b793372974960a8208ea3254f2617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tower: {fileID: 3292911561796495234}
 --- !u!114 &7668275329102627374
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,17 +12,17 @@ public class TowerSfx : MonoBehaviour
     {
         _towerPlacer = TowerPlacer.Instance;
         
-        _tower.TowerShoted += OnTowerShoted;
+        _tower.TowerShooter.TowerShooted += OnTowerShooted;
         _towerPlacer.OnTowerPlaced += OnTowerPlaced;
     }
 
     private void OnDisable()
     {
-        _tower.TowerShoted -= OnTowerShoted;
+        _tower.TowerShooter.TowerShooted -= OnTowerShooted;
         _towerPlacer.OnTowerPlaced -= OnTowerPlaced;
     }
 
-    private void OnTowerShoted()
+    private void OnTowerShooted()
     {
         GameAudio.Instance.PlaySfx(_tower.TowerData.ShootSfx);
     }
