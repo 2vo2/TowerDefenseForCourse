@@ -2264,6 +2264,8 @@ MonoBehaviour:
   _gameUI: {fileID: 178915658}
   _enemyBase: {fileID: 1138185109}
   _delay: 1
+  _useStartValue: 0
+  _startValue: 10
 --- !u!1001 &333918553
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1861,8 +1861,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menuUIDocument: {fileID: 178915656}
   _menuVisualTreeAsset: {fileID: 9197481963319205126, guid: fa55ed654112a2e4fafd5fe55d6f2637, type: 3}
-  _playerBase: {fileID: 0}
-  _enemyBase: {fileID: 0}
+  _playerBase: {fileID: 241034843}
+  _enemyBase: {fileID: 912078880}
   _winLoseScreen: {fileID: 178915659}
   _settingsScreen: {fileID: 178915660}
 --- !u!114 &178915659
@@ -2143,6 +2143,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2111032646245359838, guid: 675f51f9deddea948878cccdfbf608f6, type: 3}
   m_PrefabInstance: {fileID: 235362366}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &241034843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4086053216630383557, guid: feaa3e946d03b5c468cd29cf5a988496, type: 3}
+  m_PrefabInstance: {fileID: 1619081625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be9421f33cb3b540b53f6fb72eb1944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &249663386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2997,6 +3008,8 @@ MonoBehaviour:
   _gameUI: {fileID: 178915658}
   _enemyBase: {fileID: 912078880}
   _delay: 1
+  _useStartValue: 1
+  _startValue: 10
 --- !u!1001 &339224949
 PrefabInstance:
   m_ObjectHideFlags: 0

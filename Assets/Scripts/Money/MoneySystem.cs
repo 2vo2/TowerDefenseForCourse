@@ -8,6 +8,8 @@ public class MoneySystem : MonoBehaviour
     [SerializeField] private GameScreen _gameUI;
     [SerializeField] private EnemyBase _enemyBase;
     [SerializeField] private float _delay;
+    [SerializeField] private bool _useStartValue;
+    [SerializeField] private int _startValue;
 
     private int _moneyValue;
 
@@ -28,7 +30,15 @@ public class MoneySystem : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(AddMoneyPerSeconds());
+        if (_useStartValue)
+        {
+            _moneyValue = _startValue;
+            _gameUI.MoneyLabel.text = $"Money: {_moneyValue}";
+        }
+        else
+        {
+            StartCoroutine(AddMoneyPerSeconds());
+        }
     }
 
     private void OnDisable()
