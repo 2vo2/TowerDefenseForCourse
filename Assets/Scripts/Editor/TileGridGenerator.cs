@@ -10,10 +10,8 @@ public class TileGridGenerator : EditorWindow
     [SerializeField] private TileToPlace _tilePrefab;
     [SerializeField] private Road _roadPrefab;
     [SerializeField] private PlayerBase _playerBase;
-    [FormerlySerializedAs("_enemySpawner")] [SerializeField] private EnemyBase _enemyBase;
-
-    private List<Road> _randomRoads;
-
+    [SerializeField] private EnemyBase _enemyBase;
+    
     [MenuItem("Tools/Tile Grid Generator")]
     public static void ShowWindow()
     {
@@ -44,7 +42,6 @@ public class TileGridGenerator : EditorWindow
         }
 
         var parent = new GameObject("TileGrid");
-        _randomRoads = new List<Road>();
 
         int halfInnerX = Mathf.CeilToInt((_sizeX - 1) / 2f);
         int innerZ = _sizeZ - 1;
@@ -106,17 +103,6 @@ public class TileGridGenerator : EditorWindow
         // Спочатку до передфінішу (по X), не на SizeX
         Vector3 preFinish = new Vector3(_sizeX - 1, 0, finishZ);
         ConnectPoints(rightRandomPos, preFinish, parent);
-
-        // Тепер від preFinish до Finish (по Z)
-        while (Mathf.Abs(preFinish.z - finishZ) > 0.1f)
-        {
-            var connection = (Road)PrefabUtility.InstantiatePrefab(_roadPrefab);
-            connection.name = "FinalConnection_Z";
-            connection.transform.position = preFinish;
-            connection.transform.parent = parent.transform;
-
-            preFinish.z += finishZ > preFinish.z ? 1 : -1;
-        }
 
         FillRemainingWithTiles(parent);
         Debug.Log("Tiles placed successfully!");
