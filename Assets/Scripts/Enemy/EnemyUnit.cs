@@ -15,6 +15,8 @@ public class EnemyUnit : MonoBehaviour
     private HealthBar _healthBarInstance;
     private bool _isDie;
 
+    //public event UnityAction EnemyHitted;
+    public event UnityAction EnemyAttack;
     public event UnityAction<int> EnemyDied;
     
     public bool IsDie => _isDie;
@@ -37,6 +39,8 @@ public class EnemyUnit : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Projectile projectile))
         {
+            //EnemyHitted?.Invoke();
+            
             _currentHealth -= projectile.Damage;
 
             _healthBarInstance.ChangeHealthBar(_healthBar, _currentHealth, _maxHealth);
@@ -76,6 +80,7 @@ public class EnemyUnit : MonoBehaviour
         while (true)
         {
             playerBase.TakeDamage(_enemyData.Damage);
+            EnemyAttack?.Invoke();
             yield return new WaitForSeconds(_enemyData.AttackDelay);
         }
     }
@@ -86,7 +91,5 @@ public class EnemyUnit : MonoBehaviour
         EnemyDied?.Invoke(_enemyData.RewardForKill);
         
         StopAllCoroutines();
-        
-        gameObject.SetActive(false);
     }
 }

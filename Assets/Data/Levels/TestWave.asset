@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: TestWave
   m_EditorClassIdentifier: 
   _waves:
-  - EnemyType: {fileID: 5435150163818605148, guid: 3ba982b8ad74bfa41bd3524deb21569d, type: 3}
+  - EnemyType: {fileID: 5435150163818605148, guid: 7f72c863f3e2fed45933a8a526f5a0e5, type: 3}
     EnemiesCount: 1
     EnemySpawnDelay: 5
     PauseAfterWave: 10
-  - EnemyType: {fileID: 5435150163818605148, guid: 7f72c863f3e2fed45933a8a526f5a0e5, type: 3}
+  - EnemyType: {fileID: 5435150163818605148, guid: 3ba982b8ad74bfa41bd3524deb21569d, type: 3}
     EnemiesCount: 1
     EnemySpawnDelay: 5
     PauseAfterWave: 10

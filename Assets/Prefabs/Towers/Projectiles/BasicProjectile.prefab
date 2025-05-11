@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 7133214079901048132}
-  _damage: 2
+  _damage: 1
 --- !u!1 &7627491739154750797
 GameObject:
   m_ObjectHideFlags: 0

@@ -492,10 +492,57 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e120bc0f8213ff947a882e8cb81771d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 152001362387293942}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e120bc0f8213ff947a882e8cb81771d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6455710435813442167}
   m_SourcePrefab: {fileID: 100100000, guid: e120bc0f8213ff947a882e8cb81771d2, type: 3}
 --- !u!4 &8383517866789610737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e120bc0f8213ff947a882e8cb81771d2, type: 3}
   m_PrefabInstance: {fileID: 8345878643773260570}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9156923848758853195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e120bc0f8213ff947a882e8cb81771d2, type: 3}
+  m_PrefabInstance: {fileID: 8345878643773260570}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &152001362387293942
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9156923848758853195}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 483801b2ec99eff4ab368f81e497308f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6455710435813442167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9156923848758853195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e8c09227b64300afc6dd7c628a02b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 5435150163818605148}
+  _animator: {fileID: 152001362387293942}
