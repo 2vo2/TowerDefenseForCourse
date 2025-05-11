@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using SO;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,9 +10,10 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private LevelWavesScriptableObject _levelWavesData;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private int _spawnSize;
-    
-    private List<GameObject> _wavesParent = new List<GameObject>();
+
     private Dictionary<int, List<EnemyUnit>> _waveEnemies = new Dictionary<int, List<EnemyUnit>>();
+    private List<GameObject> _wavesParent = new List<GameObject>();
+    private List<EnemyUnit> _enemies = new List<EnemyUnit>();
 
     public Dictionary<int, List<EnemyUnit>> WaveEnemies => _waveEnemies;
     public event UnityAction<EnemyUnit> EnemySpawned;
@@ -53,6 +55,8 @@ public class EnemyBase : MonoBehaviour
             _waveEnemies[waveIndex] = new List<EnemyUnit>();
         
         _waveEnemies[waveIndex].Add(newEnemy);
+
+        _enemies.Add(newEnemy);
         
         EnemySpawned?.Invoke(newEnemy);
 
@@ -69,57 +73,12 @@ public class EnemyBase : MonoBehaviour
             var pauseAfterWave = _levelWavesData.Waves[i].PauseAfterWave;
             var parent = _wavesParent[i].transform;
 
-            var spawned = 0;
-            var spawnTimer = 0f;
-            
-            WaveActivated?.Invoke(i, _levelWavesData.Waves.Count);
-            EnemyLeft?.Invoke(enemiesCount);
+            yield return SpawnEnemiesWithDelay(i, enemiesCount, enemySpawnDelay, enemyType, parent);
 
-            while (spawned < enemiesCount)
-            {
-                spawnTimer += Time.deltaTime;
-                
-                if (spawnTimer >= enemySpawnDelay)
-                {
-                    spawnTimer = 0f;
-
-                    var enemy = GetInactiveEnemy(i);
-
-                    if (enemy != null && !enemy.IsDie)
-                    {
-                        enemy.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        var newEnemy = CreateNewEnemy(enemyType, parent, i);
-                        newEnemy.gameObject.SetActive(true);
-                    }
-                    
-                    spawned++;
-                    
-                    var enemiesLeft = Mathf.Max(0, enemiesCount - spawned);
-                    EnemyLeft?.Invoke(enemiesLeft);
-                }
-
-                yield return null;
-            }
-            
-            var pauseElapsed = 0f;
-
-            while (pauseElapsed < pauseAfterWave)
-            {
-                pauseElapsed += Time.deltaTime;
-                var pauseTimeLeft = Mathf.Max(0f, pauseAfterWave - pauseElapsed);
-
-                PauseAfterWave?.Invoke(pauseTimeLeft, true);
-                
-                yield return null;
-                
-                PauseAfterWave?.Invoke(0f, false);
-            }
+            yield return PauseBetweenWaves(pauseAfterWave);
         }
-        
-        WavesEnded?.Invoke("WIN!");
+
+        yield return WaitUntilAllEnemiesDead();
     }
 
     private EnemyUnit GetInactiveEnemy(int waveIndex)
@@ -140,4 +99,69 @@ public class EnemyBase : MonoBehaviour
         return null;
     }
 
+    private IEnumerator SpawnEnemiesWithDelay(int i, int enemiesCount, float enemySpawnDelay, EnemyUnit enemyType,
+        Transform parent)
+    {
+        var spawned = 0;
+        var spawnTimer = 0f;
+            
+        WaveActivated?.Invoke(i, _levelWavesData.Waves.Count);
+        EnemyLeft?.Invoke(enemiesCount);
+
+        while (spawned < enemiesCount)
+        {
+            spawnTimer += Time.deltaTime;
+                
+            if (spawnTimer >= enemySpawnDelay)
+            {
+                spawnTimer = 0f;
+
+                var enemy = GetInactiveEnemy(i);
+
+                if (enemy != null && !enemy.IsDie)
+                {
+                    enemy.gameObject.SetActive(true);
+                }
+                else
+                {
+                    var newEnemy = CreateNewEnemy(enemyType, parent, i);
+                    newEnemy.gameObject.SetActive(true);
+                }
+                    
+                spawned++;
+                    
+                var enemiesLeft = Mathf.Max(0, enemiesCount - spawned);
+                EnemyLeft?.Invoke(enemiesLeft);
+            }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator PauseBetweenWaves(float pauseAfterWave)
+    {
+        var pauseElapsed = 0f;
+
+        while (pauseElapsed < pauseAfterWave)
+        {
+            pauseElapsed += Time.deltaTime;
+            var pauseTimeLeft = Mathf.Max(0f, pauseAfterWave - pauseElapsed);
+
+            PauseAfterWave?.Invoke(pauseTimeLeft, true);
+                
+            yield return null;
+                
+            PauseAfterWave?.Invoke(0f, false);
+        }
+    }
+
+    private IEnumerator WaitUntilAllEnemiesDead()
+    {
+        while (!_enemies.All(enemy => enemy.IsDie))
+        {
+            yield return null;
+        }
+
+        WavesEnded?.Invoke("WIN!");
+    }
 }
