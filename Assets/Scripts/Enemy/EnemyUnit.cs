@@ -18,9 +18,10 @@ public class EnemyUnit : MonoBehaviour
     //public event UnityAction EnemyHitted;
     public event UnityAction EnemyAttack;
     public event UnityAction<int> EnemyDied;
-    
-    public bool IsDie => _isDie;
+
+    public EnemyUnitScriptableObject EnemyData => _enemyData;
     public Transform PointToHit => _pointToHit;
+    public bool IsDie => _isDie;
 
     private void Awake()
     {

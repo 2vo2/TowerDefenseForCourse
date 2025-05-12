@@ -388,7 +388,7 @@ NavMeshAgent:
   m_AgentTypeID: -334000983
   m_Radius: 0.2
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 999
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -398,7 +398,7 @@ NavMeshAgent:
   m_Height: 0.7
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &702447443492967383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f976ce368bff496e860ffd5e822394ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyData: {fileID: 11400000, guid: 3a09b167927889b419d24c260b093d5f, type: 2}
+  _enemyUnit: {fileID: 5435150163818605148}
   _navMeshAgent: {fileID: 7517430932137962066}
 --- !u!1001 &8710222382039624644
 PrefabInstance:

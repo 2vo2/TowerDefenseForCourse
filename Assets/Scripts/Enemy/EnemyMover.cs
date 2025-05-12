@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyMover : MonoBehaviour
 {
-    [SerializeField] private EnemyUnitScriptableObject _enemyData;
+    [SerializeField] private EnemyUnit _enemyUnit;
     [SerializeField] private NavMeshAgent _navMeshAgent;
 
     private Transform _pointToGo;
@@ -14,7 +14,7 @@ public class EnemyMover : MonoBehaviour
     private void Start()
     {
         _pointToGo = PlayerBase.Instance.PlayerBasePoint;
-        _navMeshAgent.speed = _enemyData.Speed;
+        _navMeshAgent.speed = _enemyUnit.EnemyData.Speed;
     }
 
     private void Update()
