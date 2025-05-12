@@ -44,7 +44,7 @@ public class TowerPlacer : MonoBehaviour
 
     private void OnButtonClick(int index)
     {
-        if (_moneySystem.MoneyValue >= _towerPrefabs[index].TowerData.Cost)
+        if (_moneySystem.MoneyValue >= _towerPrefabs[index].TowerData.Cost && !_towerSpawned)
         {
             _moneySystem.DeductMoney(_towerPrefabs[index].TowerData.Cost);
             

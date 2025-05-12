@@ -2704,7 +2704,7 @@ MonoBehaviour:
   _enemyBase: {fileID: 285591579}
   _delay: 1
   _useStartValue: 1
-  _startValue: 10
+  _startValue: 20
 --- !u!1001 &345951381
 PrefabInstance:
   m_ObjectHideFlags: 0
