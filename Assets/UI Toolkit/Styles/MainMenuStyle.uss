@@ -41,49 +41,46 @@
 }
 
 .settings {
-    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    align-self: stretch;
 }
 
 .music-panel {
     flex-grow: 1;
-    justify-content: center;
-    align-self: center;
+    flex-shrink: 1;
     flex-direction: column;
     align-items: center;
-    height: 256px;
+    justify-content: center;
+    padding: 32px;
+    margin: 40px auto;
+    max-width: 800px;
+    width: 40%;
     background-color: rgb(76, 174, 125);
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(255, 255, 255);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
-    border-top-width: 5px;
-    border-right-width: 5px;
-    border-bottom-width: 5px;
-    border-left-width: 5px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    margin-top: 200px;
-    margin-bottom: 200px;
+    border-width: 5px;
+    border-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    height: 20%;
 }
 
 .music-label {
-    font-size: 48px;
+    font-size: 36px;
     -unity-font-style: bold;
     color: rgb(255, 255, 255);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    align-self: center;
+    -unity-text-align: middle-center;
 }
 
 .music-toggle {
     font-size: 20px;
     color: rgb(255, 255, 255);
     -unity-font-style: bold;
-    align-items: center;
+    align-self: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .music-toggle:focus Label {
@@ -91,11 +88,14 @@
 }
 
 .volume-slider {
+    width: 100%;
+    max-width: 450px;
+    min-width: 200px;
     font-size: 20px;
     color: rgb(255, 255, 255);
-    -unity-text-align: upper-center;
-    width: 450px;
     -unity-font-style: bold;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .volume-slider:focus Label {
