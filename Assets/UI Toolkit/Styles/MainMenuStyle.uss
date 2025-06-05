@@ -34,6 +34,35 @@
     padding-bottom: 40px;
 }
 
+.levels-button {
+    width: 10%;
+    height: 40%;
+    font-size: 500%;
+    -unity-font-style: bold;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 0;
+    color: rgb(255, 255, 255);
+    background-color: rgb(76, 174, 125);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
 .button:hover {
     background-color: rgb(56, 154, 105);
     color: rgb(255, 255, 200);

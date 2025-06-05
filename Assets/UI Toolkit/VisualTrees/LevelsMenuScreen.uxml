@@ -1,0 +1,21 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=7caa85a958134da4b957e7c0ef9d2ca7&amp;type=3#MainMenuStyle" />
+    <engine:Label text="Levels" style="font-size: 100%; -unity-text-align: middle-center; -unity-font-style: bold; color: rgb(255, 255, 255); margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;" />
+    <engine:VisualElement name="ButtonsContainer" style="flex-grow: 1; flex-direction: column; align-items: center; align-content: auto; justify-content: flex-start;">
+        <engine:VisualElement name="Row-1" style="flex-grow: 1; flex-direction: row; height: 100%; width: 100%; justify-content: space-evenly; align-items: center;">
+            <engine:Button text="1" name="LevelButton" class="levels-button button" />
+            <engine:Button text="2" name="LevelButton" class="levels-button button" />
+            <engine:Button text="3" name="LevelButton" class="levels-button button" />
+            <engine:Button text="4" name="LevelButton" class="levels-button" />
+            <engine:Button text="5" name="LevelButton" class="levels-button" />
+        </engine:VisualElement>
+        <engine:VisualElement name="Row-2" style="flex-grow: 1; flex-direction: row; height: 100%; width: 100%; justify-content: space-evenly; align-items: center;">
+            <engine:Button text="6" name="LevelButton" class="levels-button button" />
+            <engine:Button text="7" name="LevelButton" class="levels-button button" />
+            <engine:Button text="8" name="LevelButton" class="levels-button button" />
+            <engine:Button text="9" name="LevelButton" class="levels-button" />
+            <engine:Button text="10" name="LevelButton" class="levels-button button" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+    <engine:Button text="Back" name="BackButton" class="button" style="align-items: auto; align-self: center;" />
+</engine:UXML>

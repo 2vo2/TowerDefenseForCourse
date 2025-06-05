@@ -1,11 +1,12 @@
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class MainMenuScreen : UIScreen
 {
     [SerializeField] private SettingsScreen _settingsScreen;
+    [SerializeField] private LevelsMenuScreen _levelsMenuScreen;
     
     private Button _playButton;
     private Button _settingsButton;
@@ -29,7 +30,7 @@ public class MainMenuScreen : UIScreen
         _playButton.RegisterCallback<ClickEvent>(evt =>
         {
             GameAudio.Instance.PlaySfx(GameAudio.Instance.GameAudioData.ClickSfx);
-            SceneManager.LoadSceneAsync(1);
+            _levelsMenuScreen.ShowMenu();
         });
         _settingsButton.RegisterCallback<ClickEvent>(evt =>
         {
