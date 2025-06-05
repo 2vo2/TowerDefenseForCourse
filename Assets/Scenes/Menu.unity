@@ -618,6 +618,7 @@ MonoBehaviour:
   _menuUIDocument: {fileID: 803686290}
   _menuVisualTreeAsset: {fileID: 9197481963319205126, guid: 69e5c10db414efd42bcfaf624273fffa, type: 3}
   _settingsScreen: {fileID: 803686293}
+  _levelsMenuScreen: {fileID: 803686294}
 --- !u!114 &803686293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,11 +643,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 803686289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a1f39921d5d470fbad4b6322d0d9384, type: 3}
+  m_Script: {fileID: 11500000, guid: ea616d68d406423d8dbbfb47adc5e375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _menuUIDocument: {fileID: 803686290}
-  _menuVisualTreeAsset: {fileID: 9197481963319205126, guid: c62f1df69fa20fe48943eb22dcbc2d88, type: 3}
+  _menuVisualTreeAsset: {fileID: 9197481963319205126, guid: f252272393a4b914388abe197b807d65, type: 3}
   _mainMenuScreen: {fileID: 803686292}
 --- !u!1001 &804760117
 PrefabInstance:

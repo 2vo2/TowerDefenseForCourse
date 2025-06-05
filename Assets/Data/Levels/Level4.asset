@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 142e9573fd2a4d669090947b8cbe105d, type: 3}
+  m_Name: Level4
+  m_EditorClassIdentifier: 
+  _waves:
+  - EnemyType: {fileID: 5435150163818605148, guid: 7f72c863f3e2fed45933a8a526f5a0e5, type: 3}
+    EnemiesCount: 9
+    EnemySpawnDelay: 1
+    PauseAfterWave: 1.5
+  - EnemyType: {fileID: 5435150163818605148, guid: e062d62e1e742e44fbad7f6206704a33, type: 3}
+    EnemiesCount: 10
+    EnemySpawnDelay: 0.9
+    PauseAfterWave: 1.4
+  - EnemyType: {fileID: 5435150163818605148, guid: 3ba982b8ad74bfa41bd3524deb21569d, type: 3}
+    EnemiesCount: 8
+    EnemySpawnDelay: 0.95
+    PauseAfterWave: 1.4

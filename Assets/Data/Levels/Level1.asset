@@ -15,13 +15,5 @@ MonoBehaviour:
   _waves:
   - EnemyType: {fileID: 5435150163818605148, guid: 5960fe16ac66ebb40b8aa2515e85c258, type: 3}
     EnemiesCount: 5
-    EnemySpawnDelay: 3
-    PauseAfterWave: 10
-  - EnemyType: {fileID: 5435150163818605148, guid: 5960fe16ac66ebb40b8aa2515e85c258, type: 3}
-    EnemiesCount: 10
-    EnemySpawnDelay: 3
-    PauseAfterWave: 10
-  - EnemyType: {fileID: 5435150163818605148, guid: 5960fe16ac66ebb40b8aa2515e85c258, type: 3}
-    EnemiesCount: 12
-    EnemySpawnDelay: 3
-    PauseAfterWave: 10
+    EnemySpawnDelay: 1.5
+    PauseAfterWave: 2

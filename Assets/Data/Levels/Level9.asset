@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 142e9573fd2a4d669090947b8cbe105d, type: 3}
+  m_Name: Level9
+  m_EditorClassIdentifier: 
+  _waves:
+  - EnemyType: {fileID: 5435150163818605148, guid: f413ffdc61ba55c4f936f9594c8aec25, type: 3}
+    EnemiesCount: 17
+    EnemySpawnDelay: 0.5
+    PauseAfterWave: 0.8
+  - EnemyType: {fileID: 5435150163818605148, guid: 7210b8021590d9146b5769660dafe510, type: 3}
+    EnemiesCount: 16
+    EnemySpawnDelay: 0.55
+    PauseAfterWave: 0.7
+  - EnemyType: {fileID: 5435150163818605148, guid: 3ba982b8ad74bfa41bd3524deb21569d, type: 3}
+    EnemiesCount: 15
+    EnemySpawnDelay: 0.6
+    PauseAfterWave: 0.8
+  - EnemyType: {fileID: 5435150163818605148, guid: f2f2e7c18f1b7664894eaa92ba78ad46, type: 3}
+    EnemiesCount: 14
+    EnemySpawnDelay: 0.65
+    PauseAfterWave: 0.7
+  - EnemyType: {fileID: 5435150163818605148, guid: 01226a4a797b2d24286d3d9593622643, type: 3}
+    EnemiesCount: 13
+    EnemySpawnDelay: 0.6
+    PauseAfterWave: 0.8
