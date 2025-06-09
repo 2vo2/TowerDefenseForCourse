@@ -15,21 +15,21 @@ MonoBehaviour:
   _waves:
   - EnemyType: {fileID: 5435150163818605148, guid: f413ffdc61ba55c4f936f9594c8aec25, type: 3}
     EnemiesCount: 17
-    EnemySpawnDelay: 0.5
-    PauseAfterWave: 0.8
+    EnemySpawnDelay: 1
+    PauseAfterWave: 1.6
   - EnemyType: {fileID: 5435150163818605148, guid: 7210b8021590d9146b5769660dafe510, type: 3}
     EnemiesCount: 16
-    EnemySpawnDelay: 0.55
-    PauseAfterWave: 0.7
+    EnemySpawnDelay: 1.1
+    PauseAfterWave: 1.4
   - EnemyType: {fileID: 5435150163818605148, guid: 3ba982b8ad74bfa41bd3524deb21569d, type: 3}
     EnemiesCount: 15
-    EnemySpawnDelay: 0.6
-    PauseAfterWave: 0.8
+    EnemySpawnDelay: 1.2
+    PauseAfterWave: 1.6
   - EnemyType: {fileID: 5435150163818605148, guid: f2f2e7c18f1b7664894eaa92ba78ad46, type: 3}
     EnemiesCount: 14
-    EnemySpawnDelay: 0.65
-    PauseAfterWave: 0.7
+    EnemySpawnDelay: 1.3
+    PauseAfterWave: 1.4
   - EnemyType: {fileID: 5435150163818605148, guid: 01226a4a797b2d24286d3d9593622643, type: 3}
     EnemiesCount: 13
-    EnemySpawnDelay: 0.6
-    PauseAfterWave: 0.8
+    EnemySpawnDelay: 1.2
+    PauseAfterWave: 1.6
