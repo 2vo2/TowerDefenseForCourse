@@ -117,17 +117,8 @@ public class EnemyBase : MonoBehaviour
                 spawnTimer = 0f;
 
                 var enemy = GetInactiveEnemy(i);
-
-                if (enemy != null && !enemy.IsDie)
-                {
-                    enemy.gameObject.SetActive(true);
-                }
-                else
-                {
-                    var newEnemy = CreateNewEnemy(enemyType, parent, i);
-                    newEnemy.gameObject.SetActive(true);
-                }
-                    
+                enemy.gameObject.SetActive(true);
+                
                 spawned++;
                     
                 var enemiesLeft = Mathf.Max(0, enemiesCount - spawned);
